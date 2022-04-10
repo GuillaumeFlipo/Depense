@@ -1,0 +1,246 @@
+.depense_container{
+    margin: 20px auto;
+    width: 100%;
+    // position: relative;
+
+    .choix_date{
+        position: relative;
+        margin:0px 0px 50px 10% ;
+
+        
+        select{
+            margin-right:20px;
+            border-radius: 10px;
+            padding: 5px;
+        }
+    }
+
+    .total_container{
+        width: 80%;
+        margin: 10px auto 40px;
+        display: flex;
+        justify-content: space-around;
+        .total_tableau{
+            // border: 1px black solid;
+            width: 250px;
+            
+            .element_tableau{
+                background-color: rgb(50,50,50);
+                padding: 5px;
+                margin: 3px 0px;
+                border-radius: 10px;
+                color: white;
+                display: flex;
+                justify-content: flex-start;
+                position: relative;
+                @include boxShadowBasic();
+
+
+                &:nth-child(even){
+                    background-color: rgb(255, 205, 23);
+                    p{
+                    color: $texte-color;
+                      
+                    }
+                }
+                &:last-of-type{
+                    background-color: rgb(0, 55, 128);
+                    margin: 20px 0px 0px 0px;
+                    p{
+                    color: white
+                     
+                    }
+                }
+                p{
+                    margin: 3px 0px 3px 5px;
+                    &:last-of-type{
+                        position:absolute;
+                        right: 5px;
+                    }
+                  
+                }
+            }
+        }
+
+    }
+
+    .categorie_container
+    {
+        margin: 20px auto;
+        width: 80%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+
+        .categorie_element{
+            min-width: 250px;
+            margin: 0px 20px 60px 0px;
+            // border: 1px solid black;
+            padding: 10px 30px 10px 30px;
+            @include boxShadowBasic();
+            background-color: rgb(50,50,50);
+            border-radius: 10px;
+            .head{
+                display: flex;
+                position: relative;
+                align-items: center;
+                margin: 0px 0px 10px 0px;
+                h2{
+                    color: rgb(255, 205, 23);
+                    margin-left: 10px;
+                    
+            
+                        }
+                        .somme{
+                            color: white;
+                            position: absolute;
+                            right: 10%;
+                        }
+            }
+            
+
+            .categorie_element_i{
+                display: flex;
+                position: relative;
+                background-color: $second-background-color;
+
+                p{
+                    margin: 3px 10px;
+                    width: 85px;
+                    padding: 5px;
+
+
+                    &:nth-child(1){
+                        margin: 0px 10px 0px 0px;
+                    }
+                }
+                .edit-delete{
+                    left: -22px;
+                    top:8px;
+                    color: white;
+                }
+                &:nth-child(1)
+                {
+                    border-radius: 5px 5px 0px 0px;
+                }
+                &:last-of-type
+                {
+                    border-radius: 0px 0px 5px 5px;
+                }
+            }
+            form{
+                // border: solid black 1px;
+                margin: 20px 0px;
+                position: relative;
+                background-color: white;
+                border-radius: 5px;
+                .plus_container{
+                    position: absolute;
+                    top:40%;
+                    left: -23px;
+                    svg{
+                       color: white;
+                        
+            
+                    }
+                }
+                input{
+                    width: 85px;
+                    margin: 3px 10px;
+                    padding: 5px;
+                    border: none;
+                    font-family: $main-font-family;
+                    // color: $title-color;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    border-radius: 10px;
+
+
+                    &::placeholder{
+                        color: $title-color;
+                    }
+                }
+                .submit_container{
+                    @include flexCenter(row);
+                    // width: 80%;
+                    // margin: 10px 0px 0px 0px;
+                    .submit{
+                        color: $title-color;
+                        margin-bottom: 10px;
+                       
+                    }
+                }
+                
+
+            }
+        }
+    }
+}
+
+@media screen and (max-width:750px) {
+    .depense_container{
+        .choix_date{
+            width: 80%;
+            margin: 20px auto;
+            @include flexCenter(row);
+            
+            
+        }
+        .categorie_container{
+            width: auto;
+            margin: 0px;
+            .categorie_element{
+                padding: 0px;
+                margin: 20px auto;
+                width: auto;
+                border-radius: 0px;
+
+                .list_depense{
+                    width: 90%;
+                    margin: 10px 5px 0px auto;
+                    // overflow: auto;
+                    .categorie_element_i{
+                        p{
+                            &:first-of-type{
+                    margin: 3px 10px 3px 15px;
+                    
+                            }
+                    
+                            
+                        }
+                        overflow: auto;
+                        width: 260px;
+                        // width: 250px;
+                        .edit-delete{
+                            left:2px;
+                            top:8px;
+                            color: black;
+                        }
+                    }
+
+                }
+                form{
+                    border-radius: 0px;
+                margin: 20px 0px;
+
+                }
+            }
+    
+            
+        }
+        .total_container{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .total_tableau{ 
+              margin: 20px auto;
+            }
+            
+        }
+    }
+    
+
+    
+}

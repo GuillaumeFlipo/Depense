@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="13px" height="10px" viewBox="0 0 13 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="QCM" transform="translate(-302.000000, -2834.000000)">
+            <g id="Icons/Check" transform="translate(296.000000, 2827.000000)">
+                <g id="round-check-24px-(1)-copy" transform="translate(3.000000, 3.000000)">
+                    <g id="Bounding_Boxes">
+                        <polygon id="Path" points="0 0 18 0 18 18 0 18"></polygon>
+                    </g>
+                    <g id="Rounded" transform="translate(3.250000, 4.500000)" fill="#065379">
+                        <path d="M3.879375,7.621875 L1.276875,5.019375 C0.984375,4.726875 0.511875,4.726875 0.219375,5.019375 L0.219375,5.019375 C-0.073125,5.311875 -0.073125,5.784375 0.219375,6.076875 L3.354375,9.211875 C3.646875,9.504375 4.119375,9.504375 4.411875,9.211875 L12.346875,1.276875 C12.639375,0.984375 12.639375,0.511875 12.346875,0.219375 L12.346875,0.219375 C12.054375,-0.073125 11.581875,-0.073125 11.289375,0.219375 L3.879375,7.621875 Z" id="Path"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,17 @@
+@import "./settings";
+// @import "./components/navigation";
+
+// Commun
+// @import "./components/Commun/Navigation.scss";
+@import "./components/Commun/Menu.scss";
+
+// Home
+
+@import "./components/home/Home.scss";
+@import './components/home/Depense.scss';
+
+// Seconnecter
+@import "./components/Seconnecter/Seconnecter.scss";
+
+// -------- Font import --------------
+@import url("https://fonts.googleapis.com/css?family=Droid+Sans|Oswald");

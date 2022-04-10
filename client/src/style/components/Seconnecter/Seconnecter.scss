@@ -1,0 +1,88 @@
+.texte_container_seconnecter {
+    // margin-top: 200px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: $title-color;
+  }
+  
+  .connexion_container {
+    // display: grid;
+    // grid-template-columns: auto auto;
+    // grid-template-rows: repeat(1, auto);
+    // grid-template-areas: "choix connexion";
+    // justify-content: center;
+    // align-items: center;
+    @include flexCenter(row);
+    margin: 20px auto 20px;
+    width: 90%;
+    animation-name: apparaitionContactForm;
+    animation-duration: 0.9s;
+    animation-fill-mode: both;
+    height: 100vh;
+    .choice_container {
+      // grid-area: choix;
+      // z-index: 10;
+      @include flexCenter(column);
+  
+      p {
+        @include submit();
+        box-shadow: none;
+        width: 120px;
+        margin: 0px;
+        text-align: center;
+        border-radius: 0px;
+        padding: 20px 5px;
+        &:hover {
+          transform: none;
+        }
+      }
+    }
+    .connexion {
+      @include boxShadowBasic();
+      @include flexCenter(column);
+      grid-area: connexion;
+      background-color: $second-background-color;
+      padding: 20px;
+      border-radius: 5px 5px 5px 5px;
+      height: 300px;
+      min-width: 250px;
+      z-index: 1;
+  
+      .login_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        label {
+          padding: 5px;
+          font-family: $title-font-family;
+          font-weight: 300;
+        }
+        input {
+          padding: 3px;
+          border: none;
+        }
+        button {
+          font-family: $title-font-family;
+          font-weight: 300;
+          font-size: 1rem;
+        }
+      }
+  
+      .formContainer {
+        @extend .login_container;
+      }
+    }
+  }
+  
+  @media screen and(max-width:500px) {
+    .connexion_container {
+      @include flexCenter(column);
+      margin-top: 80px;
+  
+      .choice_container {
+        @include flexCenter(row);
+      }
+    }
+  }
+  
