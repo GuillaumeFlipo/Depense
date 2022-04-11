@@ -42,37 +42,57 @@ const Depense = () => {
     }
   }, []);
 
+  useEffect(() => {
+    let char = "12/23/2333";
+    let date = char.slice(0, 2);
+    console.log(date, "test");
+  });
+
   return (
     <div className="depense_container">
-      <div className="choix_date">
-        <select
-          value={year}
-          onChange={(e) => setYear(e.target.value)}
-          className="categories_annee"
-        >
-          <option value="2022">2022</option>
-          <option value="2023">2023</option>
-          <option value="2024">2024</option>
-        </select>
-        <select
-          value={month}
-          onChange={(e) => setMonth(e.target.value)}
-          className="categories_mois"
-        >
-          <option value="Janvier">Janvier</option>
-          <option value="Février">Février</option>
-          <option value="Mars">Mars</option>
-          <option value="Avril">Avril</option>
-          <option value="Mai">Mai</option>
-          <option value="Juin">Juin</option>
-          <option value="Juillet">Juillet</option>
-          <option value="Août">Août</option>
-          <option value="Septembre">Septembre</option>
-          <option value="Octobre">Mars</option>
-          <option value="Novembre">Novembre</option>
-          <option value="Décembre">Décembre</option>
-        </select>
+      <div className="head_date_container">
+        <div className="choix_date">
+          <select
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+            className="categories_annee"
+          >
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+          </select>
+          <select
+            value={month}
+            onChange={(e) => setMonth(e.target.value)}
+            className="categories_mois"
+          >
+            <option value="Janvier">Janvier</option>
+            <option value="Février">Février</option>
+            <option value="Mars">Mars</option>
+            <option value="Avril">Avril</option>
+            <option value="Mai">Mai</option>
+            <option value="Juin">Juin</option>
+            <option value="Juillet">Juillet</option>
+            <option value="Août">Août</option>
+            <option value="Septembre">Septembre</option>
+            <option value="Octobre">Mars</option>
+            <option value="Novembre">Novembre</option>
+            <option value="Décembre">Décembre</option>
+          </select>
+        </div>
+        <div className="actualiser_container">
+          <div className="pointer submit">
+            <p
+              onClick={() => {
+                window.location = "/";
+              }}
+            >
+              Actualiser
+            </p>
+          </div>
+        </div>
       </div>
+
       <div className="total_container">
         <TableauChart
           categories={categories}
@@ -89,6 +109,8 @@ const Depense = () => {
             year={year}
             key={key}
             transactionData={transactionData}
+            moisNum={date.getMonth() + 1}
+            jourNum={date.getDate()}
           />
         ))}
       </div>

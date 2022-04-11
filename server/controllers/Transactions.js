@@ -36,14 +36,11 @@ module.exports.updateTransaction = async (req, res) => {
       } else {
         transaction
           .update({
-            content: req.body.content,
-            path: req.body.path,
-            order: req.body.order,
-            type: req.body.type,
-            where: req.body.where,
-            className: req.body.className,
-            table: req.body.table,
-            nameInTable: req.body.nameInTable,
+            nom: req.body.nom,
+            somme: req.body.somme,
+            comment: req.body.comment,
+            date: req.body.date,
+            dateString: req.body.dateString,
           })
           .then((docs) => {
             res.send(docs);
