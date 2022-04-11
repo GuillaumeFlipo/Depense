@@ -3,6 +3,9 @@ require("dotenv").config({ path: "./config/.env" });
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const { checkUser, requireAuth } = require("./middleware/Auths");
+// const shell = require("shelljs");
+
+// shell.exec("node index.js");
 
 const app = express();
 

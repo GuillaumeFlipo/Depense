@@ -36,10 +36,38 @@
                 @include boxShadowBasic();
 
 
-                &:nth-child(even){
-                    background-color: rgb(255, 205, 23);
+                &:nth-child(1){
+                    background-color: #353D40;
                     p{
-                    color: $texte-color;
+                    color: white;
+                      
+                    }
+                }
+                &:nth-child(2){
+                    background-color: #0A9155;
+                    p{
+                    color: white;
+                      
+                    }
+                }
+                &:nth-child(3){
+                    background-color: #F2B138;
+                    p{
+                    color: white;
+                      
+                    }
+                }
+                &:nth-child(4){
+                    background-color: #631f00;
+                    p{
+                    color: white;
+                      
+                    }
+                }
+                &:nth-child(5){
+                    background-color:  #A1A5A6;
+                    p{
+                    color: white;
                       
                     }
                 }
@@ -210,7 +238,7 @@
                             
                         }
                         overflow: auto;
-                        width: 260px;
+                        width: 310px;
                         // width: 250px;
                         .edit-delete{
                             left:2px;

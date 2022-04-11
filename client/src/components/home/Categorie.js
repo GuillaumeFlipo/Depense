@@ -44,7 +44,7 @@ const Categorie = ({ cat, year, month, transactionData }) => {
     };
 
     dispatch(addTransaction(data));
-    await dispatch(getTransactions());
+    // await dispatch(getTransactions());
     setComment("");
     setNom("");
     setSomme("");
@@ -97,12 +97,12 @@ const Categorie = ({ cat, year, month, transactionData }) => {
                 <div className="edit-delete">
                   <FontAwesomeIcon
                     icon={faTrashCan}
-                    onClick={() => handleDelete()}
+                    onClick={() => handleDelete(transaction.id)}
                   />
                 </div>
                 <p>{transaction.dateString}</p>
                 <p>{transaction.nom}</p>
-                <p>{transaction.somme}</p>
+                <p>{transaction.somme} €</p>
                 <p>{transaction.comment}</p>
               </div>
             ))}

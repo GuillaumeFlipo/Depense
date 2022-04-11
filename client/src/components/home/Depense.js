@@ -82,16 +82,15 @@ const Depense = () => {
         />
       </div>
       <div className="categorie_container">
-        {!isEmpty(transactionData) &&
-          categories.map((cat, key) => (
-            <Categorie
-              cat={cat}
-              month={month}
-              year={year}
-              key={key}
-              transactionData={transactionData}
-            />
-          ))}
+        {categories.map((cat, key) => (
+          <Categorie
+            cat={cat}
+            month={month}
+            year={year}
+            key={key}
+            transactionData={transactionData}
+          />
+        ))}
       </div>
     </div>
   );
