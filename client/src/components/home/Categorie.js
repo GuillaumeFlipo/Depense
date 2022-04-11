@@ -7,47 +7,48 @@ import {
 } from "../../actions/transaction.action";
 import { isEmpty } from "../../fonction_js/Utils";
 import { UidContext } from "../AppContext";
-import deleteSVG from "./../../assets/delete.svg";
-import plus from "./../../assets/plus-solid.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import EditTransaction from "./EditTransaction";
 
-const Categorie = ({ cat, year, month, transactionData }) => {
-  let date_ = new Date(Date.now());
-
+const Categorie = ({ cat, year, month, transactionData, moisNum, jourNum }) => {
   const dispatch = useDispatch();
   const [uid, setUid] = useContext(UidContext);
 
   const [nom, setNom] = useState("");
   const [somme, setSomme] = useState("");
   const [comment, setComment] = useState("");
-  const [date, setDate] = useState(date_.toLocaleDateString());
+  const [date, setDate] = useState(jourNum);
   const [sommeTotal, setSommeTotal] = useState(0);
 
   // const transactionData = useSelector((state) => state.transactionReducer);
 
-  const handleForm = async (e) => {
+  const handleForm = (e) => {
     e.preventDefault();
-
-    let date_ = new Date(date);
+    let somme_ = somme.toString();
+    let result_somme = somme_.replace(",", ".");
+    let date_ = new Date(Date.now());
+    let date2 = date.toString();
+    let result_date = date2.slice(0, 2);
 
     const data = {
       categorie: cat,
       month: month,
       year: year,
       nom: nom,
-      somme: somme,
+      somme: parseFloat(result_somme),
       comment: comment,
       UserId: uid,
       date: date_,
-      dateString: date,
+      dateString: result_date,
     };
 
     dispatch(addTransaction(data));
-    // await dispatch(getTransactions());
+    // window.location = "/";
     setComment("");
     setNom("");
     setSomme("");
+    // calculSommeFunction();
   };
 
   const handleDelete = (id) => {
@@ -59,7 +60,7 @@ const Categorie = ({ cat, year, month, transactionData }) => {
 
   useEffect(() => {
     if (!isEmpty(transactionData)) {
-      let somme = 0;
+      let somme_ = 0;
       for (let i = 0; i < transactionData.length; i++) {
         if (
           transactionData[i].categorie == cat &&
@@ -67,12 +68,22 @@ const Categorie = ({ cat, year, month, transactionData }) => {
           transactionData[i].year == year &&
           transactionData[i].UserId == uid
         ) {
-          somme += transactionData[i].somme;
+          somme_ = transactionData[i].somme + somme_;
         }
       }
-      setSommeTotal(somme);
+
+      if (somme_ != 0) {
+        setSommeTotal(somme_.toFixed(2));
+      } else {
+        setSommeTotal(somme_);
+      }
     }
   }, [transactionData, uid, month, year]);
+
+  const integerFunction = (x) => {
+    let val = parseInt(x);
+    return val;
+  };
 
   return (
     <div className="categorie_element">
@@ -91,20 +102,29 @@ const Categorie = ({ cat, year, month, transactionData }) => {
                 val.year == year &&
                 val.UserId == uid
             )
-            .sort((a, b) => b.date - a.date)
+            .sort(
+              (a, b) =>
+                integerFunction(a.dateString) - integerFunction(b.dateString)
+            )
             .map((transaction, key) => (
-              <div className="categorie_element_i" key={key}>
-                <div className="edit-delete">
-                  <FontAwesomeIcon
-                    icon={faTrashCan}
-                    onClick={() => handleDelete(transaction.id)}
-                  />
-                </div>
-                <p>{transaction.dateString}</p>
-                <p>{transaction.nom}</p>
-                <p>{transaction.somme} €</p>
-                <p>{transaction.comment}</p>
-              </div>
+              // <div className="categorie_element_i" key={key}>
+              //   <div className="edit-delete">
+              //     <FontAwesomeIcon
+              //       icon={faTrashCan}
+              //       onClick={() => handleDelete(transaction.id)}
+              //     />
+              //   </div>
+              //   <p>{transaction.dateString}</p>
+              //   <p>{transaction.nom}</p>
+              //   <p>{transaction.somme} €</p>
+              //   <p>{transaction.comment}</p>
+              // </div>
+              <EditTransaction
+                transaction={transaction}
+                key={key}
+                moisNum={moisNum}
+                year={year}
+              />
             ))}
       </div>
       {uid != null && (
@@ -128,6 +148,7 @@ const Categorie = ({ cat, year, month, transactionData }) => {
             className="input"
             onChange={(e) => setNom(e.target.value)}
           />
+
           <input
             type="text"
             name="somme"

@@ -11,22 +11,22 @@ const TableauChart = ({ categories, month, year, transactionData }) => {
 
   const pageData = useSelector((state) => state.pageReducer);
 
-  const sommeFunction = (cat) => {
-    if (!isEmpty(transactionData)) {
-      let somme = 0;
-      for (let i = 0; i < transactionData.length; i++) {
-        if (
-          transactionData[i].categorie == cat &&
-          transactionData[i].month == month &&
-          transactionData[i].year == year &&
-          transactionData[i].UserId == uid
-        ) {
-          somme += transactionData[i].somme;
-        }
-      }
-      setSommeTotalCat(somme);
-    }
-  };
+  // const sommeFunction = (cat) => {
+  //   if (!isEmpty(transactionData)) {
+  //     let somme = 0;
+  //     for (let i = 0; i < transactionData.length; i++) {
+  //       if (
+  //         transactionData[i].categorie == cat &&
+  //         transactionData[i].month == month &&
+  //         transactionData[i].year == year &&
+  //         transactionData[i].UserId == uid
+  //       ) {
+  //         somme += transactionData[i].somme.toPrecision(2);
+  //       }
+  //     }
+  //     setSommeTotalCat(somme);
+  //   }
+  // };
 
   useEffect(() => {
     if (!isEmpty(transactionData)) {
@@ -47,11 +47,17 @@ const TableauChart = ({ categories, month, year, transactionData }) => {
         }
         // console.log(somme, "somme");
         // console.log(somme_array, "array");
-        somme_array.push(somme);
+
+        if (somme != 0) {
+          somme_array.push(somme.toFixed(2));
+        } else {
+          somme_array.push(somme);
+        }
         sommeTot += somme;
       }
+
       setSommeTotalCat(somme_array);
-      setSommeTotal(sommeTot);
+      setSommeTotal(sommeTot.toFixed(2));
     }
   }, [transactionData, uid, month, year]);
 

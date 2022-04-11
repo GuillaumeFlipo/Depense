@@ -2,18 +2,33 @@
     margin: 20px auto;
     width: 100%;
     // position: relative;
-
-    .choix_date{
-        position: relative;
-        margin:0px 0px 50px 10% ;
-
-        
-        select{
-            margin-right:20px;
-            border-radius: 10px;
-            padding: 5px;
+    .head_date_container{
+        @include flexCenter(row);
+        width: 50%;
+        justify-content: space-around;
+        margin: 0px auto 40px auto;
+        .choix_date{
+            position: relative;
+            // margin:0px 0px 50px 0px ;
+    
+            
+            select{
+                margin-right:20px;
+                border-radius: 10px;
+                padding: 5px;
+            }
         }
+        .actualiser_container{
+            @include flexCenter(row);
+            .submit{
+                margin-top: 0px;
+            }
+    
+        }
+
     }
+
+    
 
     .total_container{
         width: 80%;
@@ -102,10 +117,10 @@
 
 
         .categorie_element{
-            min-width: 250px;
+            min-width: 240px;
             margin: 0px 20px 60px 0px;
             // border: 1px solid black;
-            padding: 10px 30px 10px 30px;
+            padding: 10px 10px 10px 50px;
             @include boxShadowBasic();
             background-color: rgb(50,50,50);
             border-radius: 10px;
@@ -144,9 +159,12 @@
                     }
                 }
                 .edit-delete{
-                    left: -22px;
+                    left: -42px;
                     top:8px;
                     color: white;
+                    svg{
+                        margin: 0px 2px;
+                    }
                 }
                 &:nth-child(1)
                 {
@@ -208,13 +226,29 @@
 
 @media screen and (max-width:750px) {
     .depense_container{
-        .choix_date{
-            width: 80%;
-            margin: 20px auto;
-            @include flexCenter(row);
+        .head_date_container{
+            margin: 0px auto 10px auto;
+            flex-wrap: wrap;
             
-            
-        }
+                .choix_date{
+                    min-width: 200px;
+                    width: 80%;
+                    margin: 20px auto;
+                    @include flexCenter(row);
+                    
+                    
+                }
+                .actualiser_container{
+                    min-width: 200px;
+
+                    .submit{
+                        
+                    margin: 20px auto;
+
+                    }
+                }
+            }
+        
         .categorie_container{
             width: auto;
             margin: 0px;
@@ -231,7 +265,7 @@
                     .categorie_element_i{
                         p{
                             &:first-of-type{
-                    margin: 3px 10px 3px 15px;
+                    margin: 3px 10px 3px 40px;
                     
                             }
                     
@@ -244,6 +278,9 @@
                             left:2px;
                             top:8px;
                             color: black;
+                            svg{
+                                margin: 0px 2px;
+                            }
                         }
                     }
 
