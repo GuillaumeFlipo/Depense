@@ -4,9 +4,9 @@
     // position: relative;
     .head_date_container{
         @include flexCenter(row);
-        width: 50%;
+        width: 60%;
         justify-content: space-around;
-        margin: 0px auto 40px auto;
+        margin: 0px auto 60px auto;
         .choix_date{
             position: relative;
             // margin:0px 0px 50px 0px ;
@@ -24,6 +24,56 @@
                 margin-top: 0px;
             }
     
+        }
+        .date_actual_container{
+            display: flex;
+            justify-content: space-around;
+
+            svg{
+                margin-top: 8px;
+                color: #F2B138;
+                cursor: pointer;
+                &:nth-child(1){
+                    margin: 8px -20px 0px 0px;
+                }
+                &:nth-child(5){
+                    margin: 8px 0px 0px -20px;
+                }
+                
+
+                @include transitionBasic();
+                &:hover{
+                    transform: scale(1.3);
+                }
+            }
+            
+            p{
+                cursor: pointer;
+                margin: 0px 20px;
+                padding: 5px 10px;
+                opacity: 0.5;
+                width: 95px;
+                text-align: center;
+                @include transitionBasic();
+
+                &:nth-child(3){
+                    border-radius: 10px;
+                    @include boxShadowBasic();
+                    opacity: 0;
+                    transform: scale(0.4);
+                    
+                    color: $title-color;
+                    opacity: 1;
+                    @include animationBasic(0.4s);
+                    animation-name: opacity0_1;
+
+                    
+                }
+                &:hover{
+                    transform: scale(1.03);
+                }
+                
+            }
         }
 
     }
@@ -227,13 +277,13 @@
 @media screen and (max-width:750px) {
     .depense_container{
         .head_date_container{
-            margin: 0px auto 10px auto;
+            margin: -40px auto 10px auto;
             flex-wrap: wrap;
             
                 .choix_date{
                     min-width: 200px;
                     width: 80%;
-                    margin: 20px auto;
+                    margin: 30px auto;
                     @include flexCenter(row);
                     
                     
@@ -246,6 +296,26 @@
                     margin: 20px auto;
 
                     }
+                }
+                .date_actual_container{
+                    min-width: 200px;
+                    margin: 20px auto;
+
+                    svg{
+                       
+                        &:nth-child(1){
+                            margin: 8px 0px 0px 0px;
+                        }
+                        &:nth-child(5){
+                            margin: 8px 0px 0px 0px;
+                        }
+                    }
+
+                    p{
+                        margin: 0px 5px;
+                        width: 95px;
+                    }
+
                 }
             }
         

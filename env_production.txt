@@ -1,0 +1,3 @@
+PORT=5001
+CLIENT_URL=https://www.guillaumeflipo.com
+TOKEN_SECRET= xcvbjkn34567fgjhbjg4567565yfhhgvjhg343Z354354fgfgjhgjh890vjjlj
