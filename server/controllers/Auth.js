@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const { Op } = require("sequelize");
 const jwt = require("jsonwebtoken");
 
-const maxAge = 3 * 24 * 60 * 60 * 1000;
+const maxAge = 31 * 24 * 60 * 60 * 1000;
 
 const createToken = (id, nom) => {
   return jwt.sign({ nom: nom, id: id }, process.env.TOKEN_SECRET, {
