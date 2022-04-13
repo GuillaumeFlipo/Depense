@@ -6,6 +6,9 @@ import Depense from "../components/home/Depense";
 
 const Home = () => {
   // const dispatch = useDispatch();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   return (
     <React.Fragment>

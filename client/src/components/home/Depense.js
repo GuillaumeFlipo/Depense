@@ -5,6 +5,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { monthStringToNumber } from "../../fonction_js/Utils";
 import Categorie from "./Categorie";
 import TableauChart from "./TableauChart";
 
@@ -139,35 +140,35 @@ const Depense = () => {
           <FontAwesomeIcon
             icon={faChevronLeft}
             onClick={() => {
-              setNumberToMonth(monthNumber - 1);
+              setNumberToMonth(monthStringToNumber(month) - 1);
             }}
           />
 
           <p
             onClick={() => {
-              setNumberToMonth(monthNumber - 1);
+              setNumberToMonth(monthStringToNumber(month) - 1);
             }}
           >
-            {numberToMonth(monthNumber - 1)}
+            {numberToMonth(monthStringToNumber(month) - 1)}
           </p>
           <p
             onClick={() => {
-              setNumberToMonth(monthNumber);
+              setNumberToMonth(monthStringToNumber(month));
             }}
           >
-            {numberToMonth(monthNumber)}
+            {numberToMonth(monthStringToNumber(month))}
           </p>
           <p
             onClick={() => {
-              setNumberToMonth(monthNumber + 1);
+              setNumberToMonth(monthStringToNumber(month) + 1);
             }}
           >
-            {numberToMonth(monthNumber + 1)}
+            {numberToMonth(monthStringToNumber(month) + 1)}
           </p>
           <FontAwesomeIcon
             icon={faChevronRight}
             onClick={() => {
-              setNumberToMonth(monthNumber + 1);
+              setNumberToMonth(monthStringToNumber(month) + 1);
             }}
           />
         </div>
