@@ -38,9 +38,11 @@ app.get("/api/jwtid", requireAuth, (req, res) => {
 // routes
 const userRoutes = require("./routes/User");
 const TransactionsRoutes = require("./routes/Transactions");
+const CategoriesRoutes = require("./routes/Categories");
 
 app.use("/api/user", userRoutes);
 app.use("/api/transaction", TransactionsRoutes);
+app.use("/api/categorie", CategoriesRoutes);
 
 db.sequelize.sync().then(() => {
   app.listen(process.env.PORT, () => {

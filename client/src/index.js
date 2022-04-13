@@ -15,6 +15,7 @@ import rootReducer from "./reducers";
 
 import { getMeasures } from "./actions/page.action";
 import { getTransactions } from "./actions/transaction.action";
+import { getCategories } from "./actions/categorie.action";
 
 const store = createStore(
   rootReducer,
@@ -23,6 +24,7 @@ const store = createStore(
 
 store.dispatch(getMeasures());
 store.dispatch(getTransactions());
+store.dispatch(getCategories());
 
 window.onresize = function () {
   store.dispatch(getMeasures());

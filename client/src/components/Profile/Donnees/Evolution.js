@@ -34,16 +34,33 @@ const Evolution = ({
       for (let i = yearMin; i <= year; i++) {
         year_list.push(i);
       }
-      let month_list = [];
-      for (let i = monthMin; i <= monthNumber; i++) {
-        month_list.push(monthNumberToString(i));
+      let month_list_minYear = [];
+      let month_list_year = [];
+
+      if (yearMin < year) {
+        for (let i = 0; i <= monthNumber; i++) {
+          month_list_year.push(monthNumberToString(i));
+        }
+        for (let i = monthMin; i <= 11; i++) {
+          month_list_minYear.push(monthNumberToString(i));
+        }
+      } else {
+        for (let i = monthMin; i <= monthNumber; i++) {
+          month_list_year.push(monthNumberToString(i));
+        }
+        for (let i = monthMin; i <= monthNumber; i++) {
+          month_list_minYear.push(monthNumberToString(i));
+        }
       }
+      console.log("montMin", monthMin);
 
       for (let j = 0; j < year_list.length; j++) {
         let month_list_j = [0];
         if (filter == "mois") {
-          if (year_list[j] == year) {
-            month_list_j = month_list;
+          if (year_list[j] == yearMin) {
+            month_list_j = month_list_minYear;
+          } else if (year_list[j] == year) {
+            month_list_j = month_list_year;
           } else {
             month_list_j = [
               "Janvier",
@@ -59,7 +76,6 @@ const Evolution = ({
               "Novembre",
               "Décembre",
             ];
-            // console.log("test", month_list_j);
           }
         }
 
@@ -110,17 +126,17 @@ const Evolution = ({
   };
 
   const minMonth = () => {
-    let month_min = monthStringToNumber(month);
+    let month_min = 11;
+    // console.log(yearMin, "yearMin");
 
     for (let i = 0; i < transactionsData.length; i++) {
       if (
         transactionsData[i].UserId == uid &&
         transactionsData[i].year == yearMin
       ) {
-        if (
-          monthStringToNumber(transactionsData[i].month) <
-          monthStringToNumber(month)
-        ) {
+        if (monthStringToNumber(transactionsData[i].month) < month_min) {
+          console.log(transactionsData[i].month, "yearMin");
+
           month_min = monthStringToNumber(transactionsData[i].month);
         }
       }
