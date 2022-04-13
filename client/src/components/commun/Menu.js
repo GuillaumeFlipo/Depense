@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { isEmpty } from "../../fonction_js/Utils";
 import { UidContext } from "../AppContext";
 import cookie from "js-cookie";
@@ -34,12 +34,20 @@ const Menu = () => {
         {!isEmpty(userData) ? <p>Bonjour {userData.nom} !</p> : <p>Bonjour</p>}
       </div>
       <div className="menu_container">
+        <NavLink to="/">Dépenses</NavLink>
+        <NavLink to="/Profile">Profil</NavLink>
         {!isEmpty(userData) ? (
-          <li className="pointer" onClick={() => logout()}>
+          <p
+            style={{ color: "#ae952e" }}
+            className="pointer"
+            onClick={() => logout()}
+          >
             Se déconnecter
-          </li>
+          </p>
         ) : (
-          <Link to="seconnecter">Se connecter</Link>
+          <NavLink style={{ color: "#ae952e" }} to="/seconnecter">
+            Se connecter
+          </NavLink>
         )}
       </div>
     </nav>

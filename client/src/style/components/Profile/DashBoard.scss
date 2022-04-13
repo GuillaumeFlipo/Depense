@@ -1,0 +1,30 @@
+.dashBoard_container{
+    margin: 80px auto 20px;
+    .choixCat_menu{
+        width: 90%;
+        margin: 0px auto 20px;
+        display: flex;
+        // justify-content: space-around;
+        
+        p{
+            margin: 0px 20px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-family: $title-font-family;
+        }
+        .activeCat_dash{
+            @include boxShadowBasic();
+            padding: 5px 10px;
+            border-radius: 10px;
+            color: rgb(0, 55, 103);
+            background-color: rgb(150,150,150);
+        }
+    }
+}
+
+@media screen and (min-width: 750px) {
+    .dashBoard_container{
+        margin: 100px auto 20px;
+    }
+    
+}

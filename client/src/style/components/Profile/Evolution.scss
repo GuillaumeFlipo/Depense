@@ -1,0 +1,24 @@
+.evolution_container{
+    width: 80%;
+    margin: 40px auto;
+    h2{
+        text-align: center;
+        margin: 0px auto 20px;
+    }
+    
+    .evolution_chart{
+
+        width: 60%;
+        margin: auto;
+        // color: rgb(38, 157, 255);
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .evolution_container{
+        .evolution_chart{
+            width: 100%;
+        }
+    }
+    
+}

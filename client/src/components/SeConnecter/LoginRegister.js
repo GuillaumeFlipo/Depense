@@ -42,7 +42,7 @@ const LoginRegister = ({ path }) => {
             onClick={() => setRegister(true)}
             onMouseOver={() => setRegister(true)}
           >
-            S'inscricre
+            S'inscrire
           </p>
         </div>
         <div className="connexion">

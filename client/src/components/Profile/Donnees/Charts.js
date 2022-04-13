@@ -1,31 +1,34 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { isEmpty } from "../../fonction_js/Utils";
-import { UidContext } from "../AppContext";
+import { UidContext } from "../../AppContext";
 import Chart from "chart.js/auto";
+import { isEmpty } from "../../../fonction_js/Utils";
 
-const TableauChart = ({ categories, month, year, transactionData }) => {
+const Charts = ({ categories, month, year, transactionsData, filter }) => {
   const [uid, setUid] = useContext(UidContext);
+  const pageData = useSelector((state) => state.pageReducer);
   const [sommeTotalCat, setSommeTotalCat] = useState(0);
   const [sommeTotal, setSommeTotal] = useState(0);
 
-  const pageData = useSelector((state) => state.pageReducer);
-
   useEffect(() => {
-    if (!isEmpty(transactionData)) {
+    if (!isEmpty(transactionsData)) {
       let somme_array = [];
       let sommeTot = 0;
-      //   console.log(categories.length);
       for (let j = 0; j < categories.length; j++) {
         let somme = 0;
-        for (let i = 0; i < transactionData.length; i++) {
+        for (let i = 0; i < transactionsData.length; i++) {
           if (
-            transactionData[i].categorie == categories[j] &&
-            transactionData[i].month == month &&
-            transactionData[i].year == year &&
-            transactionData[i].UserId == uid
+            transactionsData[i].categorie == categories[j] &&
+            transactionsData[i].year == year &&
+            transactionsData[i].UserId == uid
           ) {
-            somme += transactionData[i].somme;
+            if (filter === "mois") {
+              if (transactionsData[i].month == month) {
+                somme += transactionsData[i].somme;
+              }
+            } else {
+              somme += transactionsData[i].somme;
+            }
           }
         }
         // console.log(somme, "somme");
@@ -42,11 +45,11 @@ const TableauChart = ({ categories, month, year, transactionData }) => {
       setSommeTotalCat(somme_array);
       setSommeTotal(sommeTot.toFixed(2));
     }
-  }, [transactionData, uid, month, year]);
+  }, [transactionsData, uid, month, year, filter]);
 
   useEffect(() => {
     if (sommeTotalCat != []) {
-      const ctx = document.getElementById("myChart").getContext("2d");
+      const ctx = document.getElementById("myChart2").getContext("2d");
       const myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -76,33 +79,7 @@ const TableauChart = ({ categories, month, year, transactionData }) => {
         },
         options: {
           responsive: true,
-          scales: {
-            // y: {
-            //   display: typeChart.legendAxe.display,
-            //   title: {
-            //     text: "Pourcentage",
-            //     display: typeChart.legendAxe.display,
-            //     color: "rgb(30,30,30)",
-            //     font: {
-            //       size: 16,
-            //     },
-            //   },
-            //   ticks: {
-            //     font: {
-            //       size: 15,
-            //     },
-            //   },
-            // },
-          },
-          //   x: {
-          //     display: typeChart.legendAxe.display,
-
-          //     ticks: {
-          //       font: {
-          //         size: 15,
-          //       },
-          //     },
-          //   },
+          scales: {},
 
           plugins: {
             legend: {
@@ -132,7 +109,6 @@ const TableauChart = ({ categories, month, year, transactionData }) => {
       };
     }
   }, [sommeTotalCat, pageData.widthScreen]);
-
   return (
     <React.Fragment>
       <div className="total_tableau">
@@ -148,10 +124,10 @@ const TableauChart = ({ categories, month, year, transactionData }) => {
         </div>
       </div>
       <div className="total_chart">
-        <canvas id="myChart"></canvas>
+        <canvas id="myChart2"></canvas>
       </div>
     </React.Fragment>
   );
 };
 
-export default TableauChart;
+export default Charts;

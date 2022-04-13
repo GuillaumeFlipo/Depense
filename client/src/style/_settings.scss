@@ -8,12 +8,12 @@ $color-3: rgb(30, 30, 30);
 $color-4: rgb(32, 35, 42);
 
 $second-background-color: rgb(241, 240, 239);
-$main-color: rgb(2, 102, 24);
+$main-color: rgb(255, 205, 23);
 $second-color: rgb(30, 197, 184);
 $title-color: #ae952e;
 $texte-color: rgb(30, 30, 30);
 $main-font-family: "Roboto", sans-serif;
-$background-color: white;
+$background-color: rgb(50,50,50);
 $title-font-family: "Spectral", serif;
 // Mixin
 
@@ -32,6 +32,11 @@ $title-font-family: "Spectral", serif;
   justify-content: center;
   align-self: center;
   flex-direction: $direction;
+}
+
+@mixin animationBasic($time) {
+  animation-duration: $time;
+  animation-fill-mode: both;
 }
 
 @mixin submit {
@@ -121,4 +126,16 @@ h4 {
 
 .edit-delete {
   @include edit-delete();
+}
+
+@keyframes opacity0_1 {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
 }

@@ -13,5 +13,10 @@
 // Seconnecter
 @import "./components/Seconnecter/Seconnecter.scss";
 
+// Profile
+@import "./components/Profile/DashBoard.scss";
+@import "./components/Profile/Donnees.scss";
+@import './components/Profile/Evolution.scss';
+
 // -------- Font import --------------
 @import url("https://fonts.googleapis.com/css?family=Droid+Sans|Oswald");
