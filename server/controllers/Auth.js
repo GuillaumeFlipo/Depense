@@ -69,7 +69,9 @@ module.exports.logout = async (req, res) => {
 
 module.exports.updatePassword = async (req, res) => {
   const { password } = req.body;
-  const user = await Users.findByPk(req.params.id)
+  const user = await Users.findByPk(req.params.id, {
+    attributes: { exclude: ["password"] },
+  })
     .then((user) => {
       if (user === null) {
         return res.status(400).send("ID unknown : " + req.params.id);

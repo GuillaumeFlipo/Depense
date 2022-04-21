@@ -12,7 +12,6 @@ const Settings = () => {
 
   const handleForm = async (e) => {
     e.preventDefault();
-    console.log("test1");
 
     const data = {
       password: AncientPassword,
@@ -25,12 +24,8 @@ const Settings = () => {
     })
       .then((value) => {
         if (value.data.message === "success") {
-          console.log("test2");
-
           if (NouveauPassword_1.length > 7) {
             if (NouveauPassword_1 === NouveauPassword_2) {
-              console.log("test3");
-
               let data2 = { password: NouveauPassword_1 };
               axios({
                 method: "put",
@@ -39,7 +34,6 @@ const Settings = () => {
                 data: data2,
               })
                 .then((val) => {
-                  console.log(val);
                   setMessage("Mot de passe modifié");
                   setAncientPassword("");
                   setNouveauPassword_1("");
@@ -55,7 +49,6 @@ const Settings = () => {
               setNouveauPassword_2("");
             }
           } else {
-            console.log("test4");
             setMessage("Le nouveau mot de passe doit dépasser 8 caractères");
           }
         } else {
