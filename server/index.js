@@ -3,6 +3,7 @@ require("dotenv").config({ path: "./config/.env" });
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const { checkUser, requireAuth } = require("./middleware/Auths");
+const path = require("path");
 // const shell = require("shelljs");
 
 // shell.exec("node index.js");
@@ -44,8 +45,20 @@ app.use("/api/user", userRoutes);
 app.use("/api/transaction", TransactionsRoutes);
 app.use("/api/categorie", CategoriesRoutes);
 
+// Handles any requests that don't match the ones above
+
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../public_html", "index.html"));
+// });
+
 db.sequelize.sync().then(() => {
   app.listen(process.env.PORT, () => {
     console.log(`running on port ${process.env.PORT}`);
   });
 });
+
+// db.sequelize.sync().then(() => {
+//   app.listen('passenger', '127.0.0.1', () => {
+//     console.log(`running on port ${process.env.PORT}`);
+//   });
+// });

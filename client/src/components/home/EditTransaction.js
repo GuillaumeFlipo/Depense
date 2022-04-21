@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
@@ -7,6 +7,7 @@ import {
   editTransaction,
   getTransactions,
 } from "../../actions/transaction.action";
+import { UidContext } from "../AppContext";
 
 const EditTransaction = ({ transaction, moisNum, year }) => {
   const [editBoll, setEditBool] = useState(false);
@@ -15,6 +16,7 @@ const EditTransaction = ({ transaction, moisNum, year }) => {
   const [comment, setComment] = useState(transaction.comment);
   const [date, setDate] = useState(transaction.dateString);
   const dispatch = useDispatch();
+  const [uid, setUid] = useContext(UidContext);
 
   const handleDelete = (id) => {
     let bol = window.confirm(`Voulez vous vraiment supprimer cette dépense ?`);
@@ -39,8 +41,8 @@ const EditTransaction = ({ transaction, moisNum, year }) => {
       id: transaction.id,
     };
 
-    dispatch(editTransaction(data));
-    await dispatch(getTransactions());
+    await dispatch(editTransaction(data));
+    dispatch(getTransactions(uid));
     setEditBool(false);
     // window.location = "/";
   };

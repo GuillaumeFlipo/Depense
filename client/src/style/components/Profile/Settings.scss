@@ -1,0 +1,75 @@
+
+    
+        .Profile_container{
+            @include flexCenter(column);
+            border-radius: 10px 10px 10px 10px;
+            background-color: rgb(245, 245, 245);
+            border: 1px solid rgb(180,180,180);
+            width: 90%;
+            margin: 20px auto;
+            .gestion_donne{
+                margin:20px auto;
+                text-align: center;
+                h2{
+                    margin: 20px auto 10px;
+                    
+                    &:nth-child(1){
+                        margin: 10px auto 30px;
+                        color: $title-color;
+                    }
+                }
+                p{
+                    margin: 8px auto;
+                    background-color: white;
+                    border-radius: 10px;
+                    padding: 6px 10px;
+                    @include boxShadowIn();
+                    span{
+                        font-weight: 600;
+                    }
+                }
+
+                form{
+                    @include flexCenter(column);
+                    background-color: white;
+                    margin: 0px auto 30px;
+                    padding: 10px 20px;
+                    border-radius: 10px;
+                    @include boxShadowIn();
+                    label{
+                        margin: 8px auto;
+                    }
+                    input{
+                        border-radius: 10px;
+                        border: 1px rgb(204, 135, 31) solid;
+                        padding: 5px;
+                        @include boxShadowIn();
+                        
+                    }
+                    .submit{
+                        margin: 20px auto;
+                        font-family: $title-font-family;
+                        font-size: 1rem;
+                        color: $title-color;
+                        border: none;
+                        @include boxShadowLow();
+                        cursor: pointer;
+                    }
+                }
+            }
+        
+    
+
+}
+
+@media screen and (min-width:800px) {
+    
+        .Profile_container{
+            width: 70%;
+        }
+    
+        
+        
+        
+    
+}

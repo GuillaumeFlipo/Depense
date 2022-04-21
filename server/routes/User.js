@@ -6,7 +6,9 @@ const userCtrl = require("./../controllers/User");
 
 // Auth
 router.post("/register", authCtrl.signUp);
+router.post("/auth/check/:id", authCtrl.checkMotdepasse);
 router.post("/login", authCtrl.signIn);
+router.put("/auth/update/:id", authCtrl.updatePassword);
 router.get("/logout", authCtrl.logout);
 
 // User db

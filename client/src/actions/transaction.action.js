@@ -7,10 +7,10 @@ export const DELETE_TRANSACTION = "DELETE_TRANSACTION";
 export const UPLOAD_EDIT = "UPLOAD_PICTURE_EDIT";
 export const UPLOAD_ADD = "UPLOAD_PICTURE_ADD";
 
-export const getTransactions = () => {
+export const getTransactions = (id) => {
   return (dispatch) => {
     return axios
-      .get(`${process.env.REACT_APP_API_URL}transaction`)
+      .get(`${process.env.REACT_APP_API_URL}transaction/${id}`)
       .then((res) => {
         dispatch({ type: GET_TRANSACTIONS, payload: res.data });
       })

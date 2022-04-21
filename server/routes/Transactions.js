@@ -5,7 +5,7 @@ const transactionCtrl = require("../controllers/Transactions");
 // const upload = multer();
 
 router.get("/", transactionCtrl.readTransaction);
-router.get("/:id", transactionCtrl.readOneTransaction);
+router.get("/:id", transactionCtrl.readTransactionsId);
 router.post("/", transactionCtrl.createTransaction);
 router.put("/:id", transactionCtrl.updateTransaction);
 router.delete("/:id", transactionCtrl.deleteTransaction);
