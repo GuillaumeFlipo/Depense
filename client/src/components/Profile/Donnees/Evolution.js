@@ -52,7 +52,6 @@ const Evolution = ({
           month_list_minYear.push(monthNumberToString(i));
         }
       }
-      console.log("montMin", monthMin);
 
       for (let j = 0; j < year_list.length; j++) {
         let month_list_j = [0];
@@ -127,7 +126,6 @@ const Evolution = ({
 
   const minMonth = () => {
     let month_min = 11;
-    // console.log(yearMin, "yearMin");
 
     for (let i = 0; i < transactionsData.length; i++) {
       if (
@@ -135,8 +133,6 @@ const Evolution = ({
         transactionsData[i].year == yearMin
       ) {
         if (monthStringToNumber(transactionsData[i].month) < month_min) {
-          console.log(transactionsData[i].month, "yearMin");
-
           month_min = monthStringToNumber(transactionsData[i].month);
         }
       }

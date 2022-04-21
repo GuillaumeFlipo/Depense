@@ -9,11 +9,19 @@ module.exports.readTransaction = async (req, res) => {
   res.status(200).json(listOfTransactions);
 };
 
-module.exports.readOneTransaction = async (req, res) => {
-  const id = req.params.id;
-  const transaction = await Transactions.findByPk(id);
-  res.status(200).json(transaction);
+module.exports.readTransactionsId = async (req, res) => {
+  const listOfTransactions = await Transactions.findAll({
+    where: { UserId: req.params.id },
+  });
+
+  res.status(200).json(listOfTransactions);
 };
+
+// module.exports.readOneTransaction = async (req, res) => {
+//   const id = req.params.id;
+//   const transaction = await Transactions.findByPk(id);
+//   res.status(200).json(transaction);
+// };
 
 module.exports.createTransaction = async (req, res) => {
   const transaction = req.body;

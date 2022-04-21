@@ -23,7 +23,6 @@ const store = createStore(
 );
 
 store.dispatch(getMeasures());
-store.dispatch(getTransactions());
 store.dispatch(getCategories());
 
 window.onresize = function () {

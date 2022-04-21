@@ -66,3 +66,52 @@ module.exports.logout = async (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
   res.redirect("/");
 };
+
+module.exports.updatePassword = async (req, res) => {
+  const { password } = req.body;
+  const user = await Users.findByPk(req.params.id)
+    .then((user) => {
+      if (user === null) {
+        return res.status(400).send("ID unknown : " + req.params.id);
+      } else {
+        bcrypt.hash(password, 10).then((hash) => {
+          user
+            .update({
+              password: hash,
+            })
+            .then((docs) => {
+              res.send(docs);
+            })
+            .catch((err) => {
+              res.status(400).send(err);
+            });
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+};
+
+module.exports.checkMotdepasse = async (req, res) => {
+  const { password } = req.body;
+  const user = await Users.findByPk(req.params.id)
+    .then((user) => {
+      if (!user) {
+        return res.json({ message: "Utilisateur non trouvé !" });
+      }
+      bcrypt
+        .compare(password, user.password)
+        .then((match) => {
+          if (!match) {
+            return res.json({
+              message: "Wrong Password",
+            });
+          } else {
+            res.status(200).json({ message: "success" });
+          }
+        })
+        .catch((error) => res.status(500).json({ error }));
+    })
+    .catch((error) => res.status(500).json({ error }));
+};
