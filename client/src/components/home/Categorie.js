@@ -107,18 +107,6 @@ const Categorie = ({ cat, year, month, transactionData, moisNum, jourNum }) => {
                 integerFunction(a.dateString) - integerFunction(b.dateString)
             )
             .map((transaction, key) => (
-              // <div className="categorie_element_i" key={key}>
-              //   <div className="edit-delete">
-              //     <FontAwesomeIcon
-              //       icon={faTrashCan}
-              //       onClick={() => handleDelete(transaction.id)}
-              //     />
-              //   </div>
-              //   <p>{transaction.dateString}</p>
-              //   <p>{transaction.nom}</p>
-              //   <p>{transaction.somme} €</p>
-              //   <p>{transaction.comment}</p>
-              // </div>
               <EditTransaction
                 transaction={transaction}
                 key={key}
@@ -139,6 +127,7 @@ const Categorie = ({ cat, year, month, transactionData, moisNum, jourNum }) => {
             value={date}
             className="input"
             onChange={(e) => setDate(e.target.value)}
+            required
           />
           <input
             type="text"
@@ -147,6 +136,7 @@ const Categorie = ({ cat, year, month, transactionData, moisNum, jourNum }) => {
             value={nom}
             className="input"
             onChange={(e) => setNom(e.target.value)}
+            required
           />
 
           <input
@@ -156,6 +146,7 @@ const Categorie = ({ cat, year, month, transactionData, moisNum, jourNum }) => {
             placeholder="*somme.."
             value={somme}
             onChange={(e) => setSomme(e.target.value)}
+            required
           />
           <input
             type="text"

@@ -7,13 +7,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "./actions/user.action";
 import axios from "axios";
 import { UidContext } from "./components/AppContext";
-import { getTransactions } from "./actions/transaction.action";
+import { addTransaction, getTransactions } from "./actions/transaction.action";
 import Cookies from "js-cookie";
+import { getTransactionRecs } from "./actions/transactionRec.action";
+import { getDepenseEvents } from "./actions/depensesEvent.action";
+import {
+  isEmpty,
+  monthNumberToString,
+  monthStringToNumber,
+  toInt,
+} from "./fonction_js/Utils";
 
 const App = () => {
+  let dateActual = new Date(Date.now());
   const userData = useSelector((state) => state.userReducer);
   const [sucessRequest, setSucessRequest] = useState(false);
   const [fetchBool, setFetchBool] = useState(false);
+  const [recTransDone, setRecTransDone] = useState(false);
+  const transactionData = useSelector((state) => state.transactionReducer);
+  const dataTransactionRec = useSelector(
+    (state) => state.transactionRecReducer
+  );
 
   const dispatch = useDispatch();
   const [uid, setUid] = useState(null);
@@ -41,13 +55,68 @@ const App = () => {
     if (uid) {
       dispatch(getUser(uid));
       dispatch(getTransactions(uid));
+      dispatch(getTransactionRecs(uid));
+      dispatch(getDepenseEvents(uid));
     }
   }, [uid]);
 
-  // useEffect(() => {
-  //   console.log(sucessRequest, "sucessRequest");
-  //   console.log(fetchBool, "fetchBool");
-  // }, [fetchBool, sucessRequest]);
+  const isInclude = (val) => {
+    let date = dateActual.toLocaleDateString();
+    let dateList = date.toString().split("/");
+    let month = monthNumberToString(toInt(dateList[1]) - 1);
+    let year = dateList[2];
+    let day = dateList[0];
+
+    console.log(
+      "étest",
+      transactionData.filter(
+        (transaction) =>
+          transaction.nom == val.nom &&
+          transaction.somme == val.somme &&
+          transaction.month == month &&
+          transaction.year == year &&
+          transaction.categorie == val.categorie
+      ).length
+    );
+
+    if (
+      transactionData.filter(
+        (transaction) =>
+          transaction.nom == val.nom &&
+          transaction.somme == val.somme &&
+          transaction.month == month &&
+          transaction.year == year &&
+          transaction.categorie == val.categorie
+      ).length === 0
+    ) {
+      if (toInt(day) >= toInt(val.date)) {
+        const data = {
+          categorie: val.categorie,
+          month: month,
+          year: year,
+          nom: val.nom,
+          somme: val.somme,
+          comment: val.comment,
+          UserId: val.UserId,
+          date: dateActual,
+          dateString: val.date,
+        };
+
+        dispatch(addTransaction(data));
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (
+      !isEmpty(dataTransactionRec) &&
+      !isEmpty(transactionData) &&
+      !recTransDone
+    ) {
+      dataTransactionRec.map((val, key) => isInclude(val));
+      setRecTransDone(true);
+    }
+  }, [dataTransactionRec]);
 
   useEffect(() => {
     if (fetchBool && !sucessRequest && Cookies.get("refresh") != "true") {
@@ -58,9 +127,6 @@ const App = () => {
   return (
     <UidContext.Provider value={[uid, setUid]}>
       <RoutesComponent />
-      <div>
-        <p></p>
-      </div>
     </UidContext.Provider>
   );
 };

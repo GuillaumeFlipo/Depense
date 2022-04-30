@@ -65,6 +65,7 @@ const Charts = ({ categories, month, year, transactionsData, filter }) => {
                 "#F2B138",
                 "#631f00",
                 "#A1A5A6",
+                "#1999b3",
               ],
               borderColor: [
                 "#353D40",
@@ -72,6 +73,7 @@ const Charts = ({ categories, month, year, transactionsData, filter }) => {
                 "#F2B138",
                 "#631f00",
                 "#A1A5A6",
+                "#1999b3",
               ],
               borderWidth: 1,
             },

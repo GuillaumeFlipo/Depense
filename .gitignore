@@ -5,6 +5,7 @@
 /client/.pnp
 .pnp.js
 /server/node_modules
+env_production.txt
 
 # Enlever les commentaires ci dessous 
 

@@ -1,54 +1,82 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
+import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from "react-redux";
 import {
-  deleteTransaction,
-  editTransaction,
-  getTransactions,
-} from "../../actions/transaction.action";
-import { UidContext } from "../AppContext";
+  deleteTransactionRec,
+  editTransactionRec,
+  getTransactionRecs,
+} from "../../../actions/transactionRec.action";
+import { UidContext } from "../../AppContext";
+import {
+  monthNumberToString,
+  monthStringToNumber,
+  weekStringToNumber,
+} from "../../../fonction_js/Utils";
 
-const EditTransaction = ({ transaction, moisNum, year }) => {
+const TransactionRecEdit = ({ transaction }) => {
   const [editBoll, setEditBool] = useState(false);
   const [nom, setNom] = useState(transaction.nom);
   const [somme, setSomme] = useState(transaction.somme);
   const [comment, setComment] = useState(transaction.comment);
-  const [date, setDate] = useState(transaction.dateString);
+  const [date, setDate] = useState(transaction.date);
+  const [categorie, setCategorie] = useState(transaction.categorie);
   const dispatch = useDispatch();
   const [uid, setUid] = useContext(UidContext);
 
   const handleDelete = (id) => {
-    let bol = window.confirm(`Voulez vous vraiment supprimer cette dépense ?`);
+    let bol = window.confirm(
+      `Voulez vous vraiment supprimer cette dépense récurrente ?`
+    );
     if (bol) {
-      dispatch(deleteTransaction(id));
+      dispatch(deleteTransactionRec(id));
     }
   };
 
   const handleEdit = async (e) => {
     e.preventDefault();
+
     let somme_ = somme.toString();
     let result_somme = somme_.replace(",", ".");
     let date2 = date.toString();
-    let result_date = date2.slice(0, 2);
-    setDate(result_date);
+
+    setDate(date2);
 
     const data = {
       nom: nom,
       somme: parseFloat(result_somme),
       comment: comment,
-      dateString: result_date,
+      categorie: categorie,
+      date: date2,
       id: transaction.id,
     };
 
-    await dispatch(editTransaction(data));
-    dispatch(getTransactions(uid));
+    await dispatch(editTransactionRec(data));
+    dispatch(getTransactionRecs(uid));
     setEditBool(false);
-    // window.location = "/";
+  };
+
+  const elementShow = () => {
+    let date_ = new Date(transaction.createdAt);
+    let date2 = date_.toLocaleDateString();
+    let dateList = date2.toString().split("/");
+    return (
+      <React.Fragment>
+        <p>
+          {transaction.reccurence} <br />
+          {date} <br /> {date2}
+        </p>
+        <p>{transaction.nom}</p>
+        <p>{transaction.somme} €</p>
+        <p>{transaction.categorie}</p>
+        <p>{transaction.comment}</p>
+      </React.Fragment>
+    );
+    // }
   };
 
   return (
-    <div className="categorie_element_i">
+    <React.Fragment>
       <div className="edit-delete">
         {transaction.id != undefined && (
           <FontAwesomeIcon
@@ -66,14 +94,14 @@ const EditTransaction = ({ transaction, moisNum, year }) => {
       </div>
       {editBoll ? (
         <form className="edit_form" onSubmit={(e) => handleEdit(e)}>
-          <input
+          {/* <input
             type="text"
             name="date"
             placeholder="*date.."
             value={date}
             className="input"
             onChange={(e) => setDate(e.target.value)}
-          />
+          /> */}
           <input
             type="text"
             name="nom"
@@ -104,17 +132,10 @@ const EditTransaction = ({ transaction, moisNum, year }) => {
           </div>
         </form>
       ) : (
-        <React.Fragment>
-          <p>
-            {transaction.dateString}/{moisNum}/{year}
-          </p>
-          <p>{transaction.nom}</p>
-          <p>{transaction.somme} €</p>
-          <p>{transaction.comment}</p>
-        </React.Fragment>
+        <React.Fragment>{elementShow()}</React.Fragment>
       )}
-    </div>
+    </React.Fragment>
   );
 };
 
-export default EditTransaction;
+export default TransactionRecEdit;

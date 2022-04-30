@@ -1,12 +1,15 @@
 .depense_container{
     margin: 120px auto 20px;
     width: 100%;
+    
     // position: relative;
     .head_date_container{
         @include flexCenter(row);
         width: 60%;
         justify-content: space-around;
         margin: 0px auto 60px auto;
+    
+
         .choix_date{
             position: relative;
             // margin:0px 0px 50px 0px ;
@@ -97,9 +100,14 @@
 
     .total_container{
         width: 80%;
-        margin: 10px auto 40px;
+        margin: -20px auto 70px;
         display: flex;
         justify-content: space-around;
+        // @include boxShadowLow();
+        // padding: 20px 10%;
+        // background-color: $second-background-color;
+        // border-radius: 10px;
+
         .total_tableau{
             // border: 1px black solid;
             width: 250px;
@@ -151,11 +159,28 @@
                       
                     }
                 }
+                &:nth-child(6){
+                    background-color:  #1999b3;
+                    p{
+                    color: white;
+                      
+                    }
+                }
                 &:last-of-type{
                     background-color: rgb(0, 55, 128);
                     margin: 20px 0px 0px 0px;
+                    @include animationBasic(0.8s);
+                    animation-name: transaction;
                     p{
-                    color: white
+                    color: white;
+                    font-weight: 600;
+                        font-family: $title-font-family;
+                        letter-spacing: 0.2em;
+                    
+                    span{
+                        font-style: italic;
+                        
+                    }
                      
                     }
                 }
@@ -212,6 +237,10 @@
                 display: flex;
                 position: relative;
                 background-color: $second-background-color;
+                @include animationBasic(0.5s);
+                animation-name: transaction;
+                transform: translateX(30%);
+        opacity: 0;
 
                 p{
                     margin: 3px 10px;
@@ -260,7 +289,7 @@
                     width: 85px;
                     margin: 3px 10px;
                     padding: 5px;
-                    border: none;
+                    border: 1px solid #FFCD17;
                     font-family: $main-font-family;
                     // color: $title-color;
                     font-size: 1rem;
@@ -279,13 +308,27 @@
                     .submit{
                         color: $title-color;
                         margin-bottom: 10px;
+                        border: none;
                        
                     }
                 }
                 
 
             }
+            .edit_form{
+                margin: 30px auto 10px;
+                input{
+                border: 1px solid green;
+                
+
+                }
+                .submit{
+                    margin: 15px auto;
+                }
+
+            }
         }
+        
     }
 }
 
@@ -293,7 +336,7 @@
     .depense_container{
         margin: 100px auto 20px;
         .head_date_container{
-            margin: -40px auto 10px auto;
+            margin: -40px auto 20px auto;
             flex-wrap: wrap;
             
                 .choix_date{
@@ -306,6 +349,7 @@
                 }
                 .actualiser_container{
                     min-width: 200px;
+                    
 
                     .submit{
                         
@@ -315,7 +359,7 @@
                 }
                 .date_actual_container{
                     min-width: 200px;
-                    margin: 20px auto;
+                    margin: 0px auto 40px;
 
                     svg{
                        
@@ -393,5 +437,16 @@
     }
     
 
+    
+}
+
+@keyframes transaction {
+    from{
+        transform: translateX(30%);
+        opacity: 0;
+    }to{
+        transform: translateX(0);
+        opacity: 1;
+    }
     
 }

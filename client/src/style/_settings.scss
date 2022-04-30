@@ -56,6 +56,7 @@ $title-font-family: "Spectral", serif;
   @include transitionBasic();
   background-color: $second-background-color;
   color: $title-color;
+  cursor: pointer;
   @include boxShadowBasic();
   &:hover {
     transform: scale(1.03);
@@ -65,12 +66,17 @@ $title-font-family: "Spectral", serif;
 @mixin edit-delete {
   position: absolute;
   right: 0px;
-  top: -20px;
+  top: -22px;
 
   img {
     height: 20px;
     width: 20px;
     margin: 0 4px;
+  }
+  svg{
+    height: 17px;
+    width: 17px;
+    margin: 0px 3px;
   }
 }
 

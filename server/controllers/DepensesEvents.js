@@ -1,45 +1,46 @@
-const { Transactions } = require("../models");
+const { DepensesEvent } = require("../models");
 
-module.exports.readTransaction = async (req, res) => {
-  const listOfTransactions = await Transactions.findAll();
+module.exports.readItems = async (req, res) => {
+  const listOfItems = await DepensesEvent.findAll();
 
-  res.status(200).json(listOfTransactions);
+  res.status(200).json(listOfItems);
 };
 
-module.exports.readTransactionsId = async (req, res) => {
-  const listOfTransactions = await Transactions.findAll({
+module.exports.readItem = async (req, res) => {
+  const listOfItem = await DepensesEvent.findAll({
     where: { UserId: req.params.id },
   });
 
-  res.status(200).json(listOfTransactions);
+  res.status(200).json(listOfItem);
 };
 
-module.exports.createTransaction = async (req, res) => {
-  const transaction = req.body;
-  await Transactions.create(transaction)
+module.exports.createItem = async (req, res) => {
+  const item = req.body;
+  await DepensesEvent.create(item)
     .then(() => {
-      res.json(transaction);
+      res.json(item);
     })
     .catch((err) => {
       res.status(500).json({ err });
     });
 };
 
-module.exports.updateTransaction = async (req, res) => {
-  const transaction = await Transactions.findByPk(req.params.id, {
+module.exports.updateItem = async (req, res) => {
+  const item = await DepensesEvent.findByPk(req.params.id, {
     attributes: { exclude: ["password"] },
   })
-    .then((transaction) => {
-      if (transaction === null) {
+    .then((item) => {
+      if (item === null) {
         return res.status(400).send("ID unknown : " + req.params.id);
       } else {
-        transaction
+        item
           .update({
             nom: req.body.nom,
-            somme: req.body.somme,
             comment: req.body.comment,
-            date: req.body.date,
-            dateString: req.body.dateString,
+            dateFin: req.body.dateFin,
+            dateDebut: req.body.dateDebut,
+            month: req.body.month,
+            year: req.body.year,
           })
           .then((docs) => {
             res.send(docs);
@@ -54,8 +55,8 @@ module.exports.updateTransaction = async (req, res) => {
     });
 };
 
-module.exports.deleteTransaction = async (req, res) => {
-  const transaction = await Transactions.destroy({
+module.exports.deleteItem = async (req, res) => {
+  const item = await DepensesEvent.destroy({
     where: {
       id: req.params.id,
     },

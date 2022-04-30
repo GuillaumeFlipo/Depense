@@ -25,7 +25,7 @@ const Login = ({ path }) => {
         setUid(null);
         if (value.data.message === "You Logged In") {
           window.scrollTo(0, 0);
-          navigate(path);
+          window.location = "/";
         }
       })
       .catch((err) => {

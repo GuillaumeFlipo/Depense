@@ -40,10 +40,14 @@ app.get("/api/jwtid", requireAuth, (req, res) => {
 const userRoutes = require("./routes/User");
 const TransactionsRoutes = require("./routes/Transactions");
 const CategoriesRoutes = require("./routes/Categories");
+const DepensesEventRoutes = require("./routes/DepensesEvents");
+const TransactionRecRoutes = require("./routes/TransactionRec");
 
 app.use("/api/user", userRoutes);
 app.use("/api/transaction", TransactionsRoutes);
 app.use("/api/categorie", CategoriesRoutes);
+app.use("/api/depensesEvent", DepensesEventRoutes);
+app.use("/api/transactionRec", TransactionRecRoutes);
 
 // Handles any requests that don't match the ones above
 

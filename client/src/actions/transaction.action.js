@@ -55,33 +55,3 @@ export const deleteTransaction = (postId) => {
       .catch((err) => console.log(err));
   };
 };
-
-export const uploadEdit = (data, type) => {
-  return (dispatch) => {
-    return axios({
-      method: "post",
-      url: `${process.env.REACT_APP_API_URL}post/upload/${type}/edit`,
-      data: data,
-      withCredentials: true,
-    })
-      .then((res) => {
-        dispatch({ type: UPLOAD_EDIT, payload: { ...data } });
-      })
-      .catch((err) => console.log(err));
-  };
-};
-
-export const uploadAdd = (data, type) => {
-  return (dispatch) => {
-    return axios({
-      method: "post",
-      url: `${process.env.REACT_APP_API_URL}post/upload/${type}/add`,
-      data: data,
-      withCredentials: true,
-    })
-      .then((res) => {
-        dispatch({ type: UPLOAD_ADD, payload: { ...data } });
-      })
-      .catch((err) => console.log(err));
-  };
-};

@@ -1,0 +1,140 @@
+.transactionRec_container{
+    width: 100%;
+    margin: 40px auto 20px;
+    display: flex;
+    flex-direction: column;
+   
+
+    h2{
+        text-align: center;
+        margin: 0px auto 40px;
+        font-size: 1.2rem;
+    }
+
+    .transactionRec_tab{
+        background-color: $background-color;
+        color: $main-color;
+        padding: 10px 0px;
+        width: 100%;
+        min-width: 320px;
+        margin: auto;
+    }
+
+    .head{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        // width: auto;
+        margin: 0px auto 20px;
+        padding: 5px;
+        border-radius: 10px;
+        background-color: $background-color;
+        color: $main-color;
+        min-width: 320px;
+
+
+
+        p{
+            margin: 0px 5px;
+            font-weight: 600;
+            font-family: $title-font-family;
+        }
+    }
+    
+    .element{
+        display: flex;
+        flex-direction: row;
+        width: 95%;
+        margin: 30px auto;
+        position: relative;
+        background-color: $second-background-color;
+        padding:  5px 5px 5px 40px;
+        border-radius: 10px;
+        min-width: 300px;
+        overflow: scroll;
+
+        .edit-delete{
+            color: $texte-color;
+            top: 4px;
+            left: 0px;
+
+        }
+
+        p{
+            margin: 0px 5px;
+            color: $texte-color;
+        }
+
+        form{
+            // border: solid black 1px;
+            margin: 20px 0px;
+            position: relative;
+            background-color: white;
+            border-radius: 5px;
+            .plus_container{
+                position: absolute;
+                top:40%;
+                left: -23px;
+                svg{
+                   color: white;
+                    
+        
+                }
+            }
+            input{
+                width: 85px;
+                margin: 3px 10px;
+                padding: 5px;
+                border: 1px solid #FFCD17;
+                font-family: $main-font-family;
+                // color: $title-color;
+                font-size: 1rem;
+                cursor: pointer;
+                border-radius: 10px;
+
+
+                &::placeholder{
+                    color: $title-color;
+                }
+            }
+            .submit_container{
+                @include flexCenter(row);
+                // width: 80%;
+                // margin: 10px 0px 0px 0px;
+                .submit{
+                    color: $title-color;
+                    margin-bottom: 10px;
+                    border: none;
+                   
+                }
+            }
+            
+
+        }
+    
+    }
+}
+
+@media screen and (min-width:500px){
+    .transactionRec_container{
+        width: 80%;
+        .head{
+            width: 80%;
+            justify-content: space-around;
+        }
+
+        .transactionRec_tab{
+            width: 80%;
+            border-radius: 10px;
+
+            .element{
+                overflow: hidden;
+                justify-content: space-around;
+                padding: 5px 0px;
+
+                
+            }
+        }
+    }
+    
+}
