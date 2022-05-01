@@ -3,7 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { getUsers } from "../../actions/users.action";
-import { isEmpty, monthNumberToString } from "../../fonction_js/Utils";
+import {
+  isEmpty,
+  monthNumberToString,
+  monthStringToNumber,
+} from "../../fonction_js/Utils";
 import { UidContext } from "../AppContext";
 import TableauChart from "../home/TableauChart";
 import CategorieEvent from "./CategoriesEvent";
@@ -160,7 +164,7 @@ const DepensesEvent_i = ({ list, setList, categories }) => {
             year={year}
             key={key}
             transactionData={transactionDataEvent}
-            moisNum={date.getMonth() + 1}
+            moisNum={monthStringToNumber(month)}
             jourNum={date.getDate()}
             list={list}
             utilisateurs={utilisateurs}

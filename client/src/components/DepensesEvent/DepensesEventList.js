@@ -41,17 +41,13 @@ const DepensesEventList = ({ list, setList }) => {
           depenseEventData
             .sort((a, b) => sortFunction(a, b))
             .map((val, key) => (
-              <div
-                className="element"
-                key={key}
-                onClick={() => setList(val.id)}
-              >
+              <React.Fragment key={key}>
                 <DepensesEventListEdit
                   depenseEvent={val}
                   list={list}
                   setList={setList}
                 />
-              </div>
+              </React.Fragment>
             ))}
       </div>
     </React.Fragment>

@@ -217,7 +217,7 @@ const Depense = () => {
             year={year}
             key={key}
             transactionData={transactionData}
-            moisNum={date.getMonth() + 1}
+            moisNum={monthStringToNumber(month)}
             jourNum={date.getDate()}
           />
         ))}

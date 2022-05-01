@@ -11,7 +11,7 @@ import {
 import { UidContext } from "../AppContext";
 import { isEmpty } from "../../fonction_js/Utils";
 
-const DepensesEventListEdit = ({ depenseEvent }) => {
+const DepensesEventListEdit = ({ depenseEvent, list, setList }) => {
   const [editBoll, setEditBool] = useState(false);
   const [nom, setNom] = useState(depenseEvent.nom);
 
@@ -62,13 +62,13 @@ const DepensesEventListEdit = ({ depenseEvent }) => {
     e.preventDefault();
 
     let date_a = new Date(dateDebut);
-    let date_b = new Date(dateDebut);
+    let date_b = new Date(dateFin);
 
     const data = {
       nom: nom,
       comment: comment,
-      dateDebut: dateDebut,
-      dateFin: dateFin,
+      dateDebut: date_a.toJSON().split("T")[0],
+      dateFin: date_b.toJSON().split("T")[0],
       id: depenseEvent.id,
     };
 
@@ -78,9 +78,10 @@ const DepensesEventListEdit = ({ depenseEvent }) => {
   };
 
   useEffect(() => {
-    let dateActuel = new Date(Date.now());
-    setDateFin(dateActuel.toJSON().split("T")[0]);
-    setDateDebut(dateActuel.toJSON().split("T")[0]);
+    let date_a = new Date(dateDebut);
+    let date_b = new Date(dateFin);
+    setDateFin(date_a.toJSON().split("T")[0]);
+    setDateDebut(date_b.toJSON().split("T")[0]);
   }, []);
 
   const elementShow = () => {
@@ -97,7 +98,7 @@ const DepensesEventListEdit = ({ depenseEvent }) => {
   };
 
   return (
-    <React.Fragment>
+    <div className="element-above">
       <div className="edit-delete">
         {depenseEvent.id != undefined && (
           <FontAwesomeIcon
@@ -113,58 +114,67 @@ const DepensesEventListEdit = ({ depenseEvent }) => {
           className="pointer"
         />
       </div>
+
       {editBoll ? (
-        <form className="edit_form" onSubmit={(e) => handleEdit(e)}>
-          <input
-            type="text"
-            name="nom"
-            className="input"
-            placeholder="*nom.."
-            value={nom}
-            onChange={(e) => setNom(e.target.value)}
-            required
-          />
+        <div className="element">
+          <form className="edit_form" onSubmit={(e) => handleEdit(e)}>
+            <input
+              type="text"
+              name="nom"
+              className="input"
+              placeholder="*nom.."
+              value={nom}
+              onChange={(e) => setNom(e.target.value)}
+              required
+            />
 
-          <input
-            type="date"
-            name="dateDebut"
-            className="input"
-            placeholder="*dateDebut.."
-            value={dateDebut}
-            min="2022-01-01"
-            max="2023-12-31"
-            onChange={(e) => setDateDebut(e.target.value)}
-            required
-          />
+            <input
+              type="date"
+              name="dateDebut"
+              className="input"
+              placeholder="*dateDebut.."
+              value={dateDebut}
+              min="2022-01-01"
+              max="2023-12-31"
+              onChange={(e) => setDateDebut(e.target.value)}
+              required
+            />
 
-          <input
-            type="date"
-            name="dateFin"
-            className="input"
-            placeholder="*dateFin.."
-            value={dateFin}
-            min="2022-01-01"
-            max="2023-12-31"
-            onChange={(e) => setDateFin(e.target.value)}
-            required
-          />
+            <input
+              type="date"
+              name="dateFin"
+              className="input"
+              placeholder="*dateFin.."
+              value={dateFin}
+              min="2022-01-01"
+              max="2023-12-31"
+              onChange={(e) => setDateFin(e.target.value)}
+              required
+            />
 
-          <input
-            type="text"
-            name="comment"
-            className="input"
-            placeholder="*comment.."
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
-          <div className="submit_container">
-            <input type="submit" value="Modifier" className="pointer submit" />
-          </div>
-        </form>
+            <input
+              type="text"
+              name="comment"
+              className="input"
+              placeholder="*comment.."
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
+            <div className="submit_container">
+              <input
+                type="submit"
+                value="Modifier"
+                className="pointer submit"
+              />
+            </div>
+          </form>
+        </div>
       ) : (
-        <React.Fragment>{elementShow()}</React.Fragment>
+        <div className="element" onClick={() => setList(depenseEvent.id)}>
+          <React.Fragment>{elementShow()}</React.Fragment>
+        </div>
       )}
-    </React.Fragment>
+    </div>
   );
 };
 

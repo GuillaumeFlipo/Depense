@@ -37,15 +37,24 @@
         }
 
         
+.element-above{
+    position: relative;
+    .edit-delete{
+        color: white;
+        top: 4px;
+        left: 7px;
+
+    }
+}
 
         .element{
         display: flex;
         flex-direction: row;
-        width: 95%;
-        margin: 30px auto;
+        width: 80%;
+        margin: 30px auto 30px 60px;
         position: relative;
         background-color: $second-background-color;
-        padding:  5px 5px 5px 40px;
+        padding:  5px 5px 5px 5px;
         border-radius: 0px 10px 10px 0px;
         min-width: 300px;
         overflow: scroll;
@@ -57,12 +66,7 @@
             border-left: 3px $main-color solid;
         }
 
-        .edit-delete{
-            color: $texte-color;
-            top: 4px;
-            left: 0px;
-
-        }
+       
 
         p{
             margin: 0px 5px;
@@ -136,7 +140,7 @@
                 overflow: hidden;
                 justify-content: space-around;
                 padding:  5px 5px 5px 40px;
-                width: 95%;
+                width: 90%;
                 min-width: 300px;
 
 

@@ -1,4 +1,4 @@
-const { Op } = require("sequelize/dist");
+const { Op } = require("sequelize");
 const { DepensesEvent } = require("../models");
 
 module.exports.readItems = async (req, res) => {

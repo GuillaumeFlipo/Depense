@@ -96,7 +96,11 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (!isEmpty(dataTransactionRec) && !recTransDone) {
+    if (
+      !isEmpty(dataTransactionRec) &&
+      !recTransDone &&
+      !isEmpty(transactionData)
+    ) {
       dataTransactionRec.map((val, key) => isInclude(val));
       setRecTransDone(true);
     }

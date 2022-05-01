@@ -118,7 +118,7 @@ const EditTransactionEvent = ({ transaction, moisNum, year }) => {
       ) : (
         <React.Fragment>
           <p>
-            {transaction.dateString}/{moisNum}/{year}
+            {transaction.dateString}/{moisNum + 1}/{year}
           </p>
           <p>{transaction.nom}</p>
           {transaction.quiPaye == "Nous deux" ? (
