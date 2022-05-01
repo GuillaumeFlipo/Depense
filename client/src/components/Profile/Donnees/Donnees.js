@@ -23,7 +23,15 @@ const Donnees = () => {
   const [filter, setFilter] = useState("mois");
   const [monthNumber, setMonthNumber] = useState(date.getMonth());
 
-  const categories = ["Nourriture", "Transport", "Loisir", "Santé", "Autre"];
+  const categories = [
+    "Nourriture",
+    "Transport",
+    "Logement",
+    "Loisir",
+    "Santé",
+    "Abonnement",
+    "Autre",
+  ];
 
   useEffect(() => {
     setNumberToMonth(date.getMonth());

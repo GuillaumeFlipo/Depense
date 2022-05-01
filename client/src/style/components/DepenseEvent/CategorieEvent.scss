@@ -1,0 +1,135 @@
+.depenseEvent_container{
+    
+    @extend .depense_container;
+
+    width: 100%;
+
+    .categorie_container{
+        .categorie_element{
+
+            .head{
+                margin: 0px auto 30px;
+                position: relative;
+                .tab_valeur{
+                    margin: 20px auto 0px;
+                    color: white;
+                    display: flex;
+                    justify-content: space-around;
+                    position: absolute;
+                    bottom: -20px;
+                    width: 100%;
+
+                    // p{
+                    //     margin: 0px 3px;
+                    // }
+                }
+            }
+            form{
+                
+                    label{
+                        margin: 0px 4px;
+                    }
+                }
+            }
+        }
+    
+    .retourList{
+       
+        font-size: 1.2rem;
+        font-style: italic;
+    margin: 0px auto 20px;
+    text-align: center;
+
+        width: 80%;
+
+
+        svg{
+            color: $main-color;
+        }
+
+    
+   
+        
+    
+    
+    
+    
+}
+.Title_evenement{
+    margin: 0px auto 60px;
+    width: 80%;
+    text-align: center;
+    span{
+        color: $title-color;
+    }
+}
+.depense_i_container{
+    .somme_container{
+        width: 90%;
+        margin: 0px auto 20px;
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        
+        .somme_element{
+           display: flex;
+           background-color: $second-background-color;
+           padding: 5px 10px;
+           border-radius: 10px;
+           position: relative;
+
+           &:last-of-type{
+            span{
+                color: green;
+            }
+        }
+            
+        }
+        p{
+            margin: 3px 5px;
+           
+
+            span{
+                color: $title-color;
+                font-weight: 600;
+                position: absolute;
+                right: 5px;
+            }
+        
+            
+
+        }
+    }
+}
+
+
+   
+
+    
+
+}
+
+@media screen and (max-width:750px) {
+    .depenseEvent_container{
+        width: 100%;
+        .Title_evenement{
+            margin: 0px auto 30px;
+        }
+        .categorie_container{
+            width: 100%;
+            .categorie_element{
+                width: 100%;
+                .list_depense{
+                    .categorie_element_i{
+                    width: 350px;
+                        
+                    }
+                }
+            }
+        }
+            
+    }
+    
+
+    
+}

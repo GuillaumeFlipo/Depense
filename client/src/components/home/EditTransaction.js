@@ -50,14 +50,22 @@ const EditTransaction = ({ transaction, moisNum, year }) => {
   return (
     <div className="categorie_element_i">
       <div className="edit-delete">
+        {transaction.id != undefined && (
+          <FontAwesomeIcon
+            className="pointer"
+            icon={faTrashCan}
+            onClick={() => handleDelete(transaction.id)}
+          />
+        )}
+
         <FontAwesomeIcon
-          icon={faTrashCan}
-          onClick={() => handleDelete(transaction.id)}
+          icon={faEdit}
+          onClick={() => setEditBool(!editBoll)}
+          className="pointer"
         />
-        <FontAwesomeIcon icon={faEdit} onClick={() => setEditBool(!editBoll)} />
       </div>
       {editBoll ? (
-        <form onSubmit={(e) => handleEdit(e)}>
+        <form className="edit_form" onSubmit={(e) => handleEdit(e)}>
           <input
             type="text"
             name="date"
@@ -98,7 +106,7 @@ const EditTransaction = ({ transaction, moisNum, year }) => {
       ) : (
         <React.Fragment>
           <p>
-            {transaction.dateString}/{moisNum}/{year}
+            {transaction.dateString}/{moisNum + 1}/{year}
           </p>
           <p>{transaction.nom}</p>
           <p>{transaction.somme} €</p>

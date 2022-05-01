@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Donnees from "./Donnees/Donnees";
+import Gestion from "./Gestion/Gestion";
 import Settings from "./Settings/Settings";
 
 const DashBoard = () => {
@@ -11,6 +12,8 @@ const DashBoard = () => {
         return <Settings />;
       case "donnee_Cat":
         return <Donnees />;
+      case "gestion_Cat":
+        return <Gestion />;
     }
   };
 
@@ -31,6 +34,9 @@ const DashBoard = () => {
       <div className="choixCat_menu">
         <p id="donnee_Cat" onClick={() => setActiveCat("donnee_Cat")}>
           Données
+        </p>
+        <p id="gestion_Cat" onClick={() => setActiveCat("gestion_Cat")}>
+          Gestion
         </p>
         <p id="settings_Cat" onClick={() => setActiveCat("settings_Cat")}>
           Settings

@@ -74,3 +74,22 @@ export const toFloat = (x) => {
   let val = parseFloat(x);
   return val;
 };
+
+export const weekStringToNumber = (day) => {
+  switch (day) {
+    case "Lundi":
+      return 0;
+    case "Mardi":
+      return 1;
+    case "Mercredi":
+      return 2;
+    case "Jeudi":
+      return 3;
+    case "Vendredi":
+      return 4;
+    case "Samedi":
+      return 5;
+    case "Dimanche":
+      return 6;
+  }
+};

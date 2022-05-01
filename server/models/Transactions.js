@@ -32,6 +32,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    quiPaye: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    quiAPaye: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   });
 
   return Transactions;

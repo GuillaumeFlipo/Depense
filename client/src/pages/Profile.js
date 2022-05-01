@@ -5,7 +5,7 @@ import DashBoard from "../components/Profile/DashBoard";
 const Profile = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-  });
+  }, []);
   return (
     <React.Fragment>
       <Menu />

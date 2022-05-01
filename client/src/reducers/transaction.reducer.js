@@ -9,7 +9,7 @@ import {
 
 const initialState = {};
 
-export default function postReducer(state = initialState, action) {
+export default function transactionReducer(state = initialState, action) {
   switch (action.type) {
     case GET_TRANSACTIONS:
       return action.payload;

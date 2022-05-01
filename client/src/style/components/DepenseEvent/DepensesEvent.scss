@@ -1,0 +1,30 @@
+.depense_container{
+    .gestion_list_depenseEvent{
+        margin: -10px auto 30px;
+        width: 80%;
+        text-align: center;
+        
+        color: $main-color;
+        cursor: pointer;
+
+
+        a{
+            text-align: center;
+            color: $main-color;
+            font-family: $title-font-family;
+            background-color: $background-color;
+        padding: 5px 10px;
+
+        border-radius: 10px;
+
+        }
+    }
+}
+
+@media screen and (min-width:500px){
+   .depense_container{
+       .gestion_list_depenseEvent{
+           width: auto;
+       }
+   }
+}

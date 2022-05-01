@@ -62,6 +62,7 @@ const TableauChart = ({ categories, month, year, transactionData }) => {
                 "#F2B138",
                 "#631f00",
                 "#A1A5A6",
+                "#1999b3",
               ],
               borderColor: [
                 "#353D40",
@@ -69,6 +70,7 @@ const TableauChart = ({ categories, month, year, transactionData }) => {
                 "#F2B138",
                 "#631f00",
                 "#A1A5A6",
+                "#1999b3",
               ],
               borderWidth: 1,
             },
@@ -143,8 +145,10 @@ const TableauChart = ({ categories, month, year, transactionData }) => {
           </div>
         ))}
         <div className="element_tableau">
-          <p>Total</p>
-          <p>{sommeTotal} €</p>
+          <p>Total :</p>
+          <p>
+            <span>{sommeTotal} €</span>
+          </p>
         </div>
       </div>
       <div className="total_chart">

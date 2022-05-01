@@ -5,8 +5,11 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { monthStringToNumber } from "../../fonction_js/Utils";
 import Categorie from "./Categorie";
+import DepensesEvent from "./DepensesEvent";
+import PayementReccurent from "./PayementReccurent";
 import TableauChart from "./TableauChart";
 
 const Depense = () => {
@@ -18,7 +21,15 @@ const Depense = () => {
   // const listNumber = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   const transactionData = useSelector((state) => state.transactionReducer);
 
-  const categories = ["Nourriture", "Transport", "Loisir", "Santé", "Autre"];
+  const categories = [
+    "Nourriture",
+    "Transport",
+    "Logement",
+    "Loisir",
+    "Santé",
+    "Abonnement",
+    "Autre",
+  ];
 
   useEffect(() => {
     setNumberToMonth(date.getMonth());
@@ -27,10 +38,8 @@ const Depense = () => {
 
   const setNumberToMonth = (int) => {
     if (int === -1) {
-      console.log("year", year);
       int = 11;
       setYear(year - 1);
-      console.log("year", year);
     }
     if (int === 12) {
       int = 0;
@@ -193,6 +202,13 @@ const Depense = () => {
           transactionData={transactionData}
         />
       </div>
+      <React.Fragment>
+        <div className="gestion_list_depenseEvent">
+          <Link to="/DepenseEvent">Ajouter une dépense à un évènement</Link>
+        </div>
+        <PayementReccurent categories={categories} month={month} year={year} />
+        <DepensesEvent />
+      </React.Fragment>
       <div className="categorie_container">
         {categories.map((cat, key) => (
           <Categorie
@@ -201,7 +217,7 @@ const Depense = () => {
             year={year}
             key={key}
             transactionData={transactionData}
-            moisNum={date.getMonth() + 1}
+            moisNum={monthStringToNumber(month)}
             jourNum={date.getDate()}
           />
         ))}
