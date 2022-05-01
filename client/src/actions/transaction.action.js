@@ -10,7 +10,7 @@ export const UPLOAD_ADD = "UPLOAD_PICTURE_ADD";
 export const getTransactions = (id) => {
   return (dispatch) => {
     return axios
-      .get(`${process.env.REACT_APP_API_URL}transaction/${id}`)
+      .get(`${process.env.REACT_APP_API_URL}transaction`)
       .then((res) => {
         dispatch({ type: GET_TRANSACTIONS, payload: res.data });
       })

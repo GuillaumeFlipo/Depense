@@ -10,6 +10,13 @@
 @import "./components/home/Home.scss";
 @import './components/home/Depense.scss';
 @import './components/home/PayementReccurrent.scss';
+@import "./components/home/DepensesEvent.scss";
+@import "./components/home/Loading.scss";
+
+// DepenseEvent
+@import "./components/DepenseEvent/DepensesEvent.scss";
+@import "./components/DepenseEvent/DepenseEventList.scss";
+@import './components/DepenseEvent/CategorieEvent.scss';
 
 // Seconnecter
 @import "./components/Seconnecter/Seconnecter.scss";

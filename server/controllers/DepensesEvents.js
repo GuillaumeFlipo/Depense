@@ -1,3 +1,4 @@
+const { Op } = require("sequelize/dist");
 const { DepensesEvent } = require("../models");
 
 module.exports.readItems = async (req, res) => {
@@ -6,9 +7,9 @@ module.exports.readItems = async (req, res) => {
   res.status(200).json(listOfItems);
 };
 
-module.exports.readItem = async (req, res) => {
+module.exports.readItemId = async (req, res) => {
   const listOfItem = await DepensesEvent.findAll({
-    where: { UserId: req.params.id },
+    where: { UserId: { [Op.like]: "%" + `${req.params.id}` + "%" } },
   });
 
   res.status(200).json(listOfItem);

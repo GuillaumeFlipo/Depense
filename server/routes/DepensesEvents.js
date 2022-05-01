@@ -5,7 +5,7 @@ const DepensesEventCrtl = require("../controllers/DepensesEvents");
 // const upload = multer();
 
 router.get("/", DepensesEventCrtl.readItems);
-router.get("/:id", DepensesEventCrtl.readItem);
+router.get("/:id", DepensesEventCrtl.readItemId);
 router.post("/", DepensesEventCrtl.createItem);
 router.put("/:id", DepensesEventCrtl.updateItem);
 router.delete("/:id", DepensesEventCrtl.deleteItem);

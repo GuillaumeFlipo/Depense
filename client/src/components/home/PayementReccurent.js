@@ -6,7 +6,6 @@ import {
   addTransactionRec,
   getTransactionRecs,
 } from "../../actions/transactionRec.action";
-import { weekStringToNumber } from "../../fonction_js/Utils";
 import { UidContext } from "../AppContext";
 
 const PayementReccurent = ({ categories, month, year }) => {
@@ -178,7 +177,7 @@ const PayementReccurent = ({ categories, month, year }) => {
               onChange={(e) => setReccurence(e.target.value)}
             >
               <option value="Mensuel">Mensuel</option>
-              <option value="Annuel">Annuel</option>
+              {/* <option value="Annuel">Annuel</option> */}
             </select>
 
             {/* <label>Date du prélevement : </label>

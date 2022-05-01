@@ -8,6 +8,11 @@ nav{
     background-color: $second-background-color;
     z-index: 100;
     @include boxShadowBasic();
+    animation-duration: 0.8s;
+
+  animation-fill-mode: both;
+  top: 0px;
+  animation-name: apparitionNav;
     // display: flex;
     // justify-content: space-around;
 
@@ -67,3 +72,13 @@ nav{
         }
     }
 }
+
+@keyframes apparitionNav {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    to {
+      opacity: 1;
+    }
+  }

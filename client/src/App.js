@@ -67,18 +67,6 @@ const App = () => {
     let year = dateList[2];
     let day = dateList[0];
 
-    console.log(
-      "étest",
-      transactionData.filter(
-        (transaction) =>
-          transaction.nom == val.nom &&
-          transaction.somme == val.somme &&
-          transaction.month == month &&
-          transaction.year == year &&
-          transaction.categorie == val.categorie
-      ).length
-    );
-
     if (
       transactionData.filter(
         (transaction) =>
@@ -108,11 +96,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (
-      !isEmpty(dataTransactionRec) &&
-      !isEmpty(transactionData) &&
-      !recTransDone
-    ) {
+    if (!isEmpty(dataTransactionRec) && !recTransDone) {
       dataTransactionRec.map((val, key) => isInclude(val));
       setRecTransDone(true);
     }

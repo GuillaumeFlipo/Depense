@@ -1,27 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
   const DepensesEvent = sequelize.define("DepensesEvent", {
     nom: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    month: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    year: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     comment: {
       type: DataTypes.TEXT,
       allowNull: true,
     },
+    UserId: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
     dateDebut: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.DATE,
       allowNull: true,
     },
     dateFin: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.DATE,
       allowNull: true,
     },
   });

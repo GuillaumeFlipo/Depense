@@ -1,31 +1,30 @@
 .depense_container{
-    .recurrent_payment_container{
+    .depensesEvent_container{
+        @include flexCenter(row);
         position: relative;
-        @include flexCenter(row);
-    
-    
-    .recurrent_payement_false{
-        margin: 0px auto 40px;
-        width: 90%;
-        text-align: center;
-        @include flexCenter(row);
-        
-        .submit{
-            font-size: 1.4rem;
-            color: $texte-color;
-            width: auto;
-            margin:0px auto;
-            padding: 5px 15px;
-            cursor: pointer;
 
-            svg{
-                margin-right: 5px;
+        .depensesEvent_false{
+            margin: 0px auto 40px;
+            width: 90%;
+            text-align: center;
+            @include flexCenter(row);
+            
+            .submit{
+                font-size: 1.4rem;
+                color: $texte-color;
+                width: auto;
+                margin:0px auto;
+                padding: 5px 15px;
                 cursor: pointer;
+    
+                svg{
+                    margin-right: 5px;
+                    cursor: pointer;
+                }
             }
         }
-    }
-    .recurrent_payement_true{
-        width: 90%;
+        .depensesEvent_true{
+            width: 90%;
         position: absolute;
         z-index: 50;
         opacity: 0;
@@ -80,33 +79,22 @@
            
             
         }
-
-    }
-}
-}
-
-@media screen and (min-width:800px) {
-    .depense_container{
-        .recurrent_payment_container{
-            // .recurrent_payement_false{
-
-            // }
-            .recurrent_payement_true{
-               width: 400px;
-            }
         }
-        
     }
     
 }
 
-@keyframes payementRecurrent {
-    from{
-        opacity: 0;
-        transform: scale(0.5);
-    }to{
-        opacity: 1;
-        transform: scale(1);
+@media screen and (min-width:800px) {
+    .depense_container{
+        .depensesEvent_container{
+            // .depensesEvent_false{
+              
+            // }
+            .depensesEvent_true{
+               width: 400px;
+            }
+        }
+        
     }
     
 }

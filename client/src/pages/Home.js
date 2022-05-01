@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import Loading from "../components/commun/Loading";
 import Menu from "../components/commun/Menu";
 
 import Depense from "../components/home/Depense";
+import { isEmpty } from "../fonction_js/Utils";
 
 const Home = () => {
   // const dispatch = useDispatch();
@@ -10,10 +12,19 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const userData = useSelector((state) => state.userReducer);
+  const [loadingEnd, setLoadingEnd] = useState(false);
+
   return (
     <React.Fragment>
       <Menu />
-      <Depense />
+      {!isEmpty(userData) || loadingEnd ? (
+        <Depense />
+      ) : (
+        <React.Fragment>
+          <Loading loadingEnd={loadingEnd} setLoadingEnd={setLoadingEnd} />
+        </React.Fragment>
+      )}
     </React.Fragment>
   );
 };

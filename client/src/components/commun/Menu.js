@@ -1,13 +1,17 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { isEmpty } from "../../fonction_js/Utils";
 import { UidContext } from "../AppContext";
 import cookie from "js-cookie";
+import page_ from "./../../fonction_js/page_info";
 
 const Menu = () => {
   const userData = useSelector((state) => state.userReducer);
+  const pageData = useSelector((state) => state.pageReducer);
+  const [scrollPageAvant, setScrollPageAvant] = useState(0);
+
   const [uid, setUid] = useContext(UidContext);
 
   const removeCookie = (key) => {
@@ -28,8 +32,27 @@ const Menu = () => {
     window.location = "/";
   };
 
+  function disparitionMenu() {
+    let menu_mobile = document.getElementsByClassName("navigation");
+    for (let value of menu_mobile) {
+      if (
+        pageData.scrollPage > scrollPageAvant &&
+        pageData.scrollPage > page_.getYmax() / 2
+      ) {
+        value.style.display = "none";
+      } else {
+        value.style.display = "flex";
+      }
+    }
+    setScrollPageAvant(pageData.scrollPage);
+  }
+
+  useEffect(() => {
+    disparitionMenu();
+  }, [pageData.scrollPage]);
+
   return (
-    <nav>
+    <nav className="navigation">
       <div className="profile">
         {!isEmpty(userData) ? <p>Bonjour {userData.nom} !</p> : <p>Bonjour</p>}
       </div>

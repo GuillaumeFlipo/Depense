@@ -5,8 +5,10 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { monthStringToNumber } from "../../fonction_js/Utils";
 import Categorie from "./Categorie";
+import DepensesEvent from "./DepensesEvent";
 import PayementReccurent from "./PayementReccurent";
 import TableauChart from "./TableauChart";
 
@@ -201,7 +203,11 @@ const Depense = () => {
         />
       </div>
       <React.Fragment>
+        <div className="gestion_list_depenseEvent">
+          <Link to="/DepenseEvent">Ajouter une dépense à un évènement</Link>
+        </div>
         <PayementReccurent categories={categories} month={month} year={year} />
+        <DepensesEvent />
       </React.Fragment>
       <div className="categorie_container">
         {categories.map((cat, key) => (
