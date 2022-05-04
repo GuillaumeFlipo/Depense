@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import pageReducer from "./page.reducer";
 import transactionReducer from "./transaction.reducer";
+import transactionEventReducer from "./TransactionsEvent.reducer";
 import userReducer from "./user.reducer";
 import usersReducer from "./users.reducer";
 import categorieReducer from "./categorie.reducer";
@@ -15,4 +16,5 @@ export default combineReducers({
   transactionRecReducer,
   depenseEventReducer,
   usersReducer,
+  transactionEventReducer,
 });

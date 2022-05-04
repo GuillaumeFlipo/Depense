@@ -219,7 +219,6 @@ const CategorieEvent = ({
             onChange={(e) => setSomme(e.target.value)}
             required
           />
-          <label>Qui paye ?</label>
           <select value={qui} onChange={(e) => setQui(e.target.value)}>
             {utilisateurs.length == 2 && (
               <option value={"Nous deux"}>Nous deux</option>
@@ -230,7 +229,6 @@ const CategorieEvent = ({
               </option>
             ))}
           </select>
-          <label>Qui a payé ?</label>
           <select
             value={quiAPaye}
             onChange={(e) => setQuiAPaye(e.target.value)}

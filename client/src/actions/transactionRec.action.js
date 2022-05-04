@@ -7,8 +7,11 @@ export const DELETE_TRANSACREC = "DELETE_TRANSACREC";
 
 export const getTransactionRecs = (id) => {
   return (dispatch) => {
-    return axios
-      .get(`${process.env.REACT_APP_API_URL}transactionRec/${id}`)
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_URL}transactionRec/${id}`,
+      withCredentials: true,
+    })
       .then((res) => {
         dispatch({ type: GET_TRANSACRECS, payload: res.data });
       })
@@ -18,8 +21,12 @@ export const getTransactionRecs = (id) => {
 
 export const addTransactionRec = (data) => {
   return (dispatch) => {
-    return axios
-      .post(`${process.env.REACT_APP_API_URL}transactionRec`, data)
+    return axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}transactionRec`,
+      withCredentials: true,
+      data: data,
+    })
       .then((res) => {
         dispatch({ type: ADD_TRANSACREC, payload: data });
       })
@@ -33,6 +40,7 @@ export const editTransactionRec = (data) => {
       method: "put",
       url: `${process.env.REACT_APP_API_URL}transactionRec/${data.id}`,
       data: { ...data },
+      withCredentials: true,
     })
       .then((res) => {
         dispatch({ type: EDIT_TRANSACREC, payload: { ...data } });
@@ -46,6 +54,7 @@ export const deleteTransactionRec = (id) => {
     return axios({
       method: "delete",
       url: `${process.env.REACT_APP_API_URL}transactionRec/${id}`,
+      withCredentials: true,
     })
       .then((res) => {
         dispatch({ type: DELETE_TRANSACREC, payload: { id } });

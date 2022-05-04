@@ -20,7 +20,7 @@ const EditTransactionEvent = ({ transaction, moisNum, year }) => {
   const [uid, setUid] = useContext(UidContext);
   const [qui, setQui] = useState(transaction.quiPaye);
 
-  const transactionData = useSelector((state) => state.transactionReducer);
+  const transactionData = useSelector((state) => state.transactionEventReducer);
 
   const handleDelete = (id) => {
     let bol = window.confirm(`Voulez vous vraiment supprimer cette dépense ?`);
@@ -63,18 +63,20 @@ const EditTransactionEvent = ({ transaction, moisNum, year }) => {
     <div className="categorie_element_i">
       <div className="edit-delete">
         {transaction.id != undefined && (
-          <FontAwesomeIcon
-            className="pointer"
-            icon={faTrashCan}
-            onClick={() => handleDelete(transaction.id)}
-          />
-        )}
+          <React.Fragment>
+            <FontAwesomeIcon
+              className="pointer"
+              icon={faTrashCan}
+              onClick={() => handleDelete(transaction.id)}
+            />
 
-        <FontAwesomeIcon
-          icon={faEdit}
-          onClick={() => setEditBool(!editBoll)}
-          className="pointer"
-        />
+            <FontAwesomeIcon
+              icon={faEdit}
+              onClick={() => setEditBool(!editBoll)}
+              className="pointer"
+            />
+          </React.Fragment>
+        )}
       </div>
       {editBoll ? (
         <form className="edit_form" onSubmit={(e) => handleEdit(e)}>

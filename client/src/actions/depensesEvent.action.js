@@ -7,8 +7,11 @@ export const DELETE_DEPEVENT = "DELETE_DEPEVENT";
 
 export const getDepenseEvents = (id) => {
   return (dispatch) => {
-    return axios
-      .get(`${process.env.REACT_APP_API_URL}depensesEvent/${id}`)
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_URL}depensesEvent/${id}`,
+      withCredentials: true,
+    })
       .then((res) => {
         dispatch({ type: GET_DEPEVENTS, payload: res.data });
       })
@@ -18,8 +21,12 @@ export const getDepenseEvents = (id) => {
 
 export const addDepenseEvent = (data) => {
   return (dispatch) => {
-    return axios
-      .post(`${process.env.REACT_APP_API_URL}depensesEvent`, data)
+    return axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}depensesEvent`,
+      withCredentials: true,
+      data: data,
+    })
       .then((res) => {
         dispatch({ type: ADD_DEPEVENT, payload: data });
       })
@@ -33,6 +40,7 @@ export const editDepenseEvent = (data) => {
       method: "put",
       url: `${process.env.REACT_APP_API_URL}depensesEvent/${data.id}`,
       data: { ...data },
+      withCredentials: true,
     })
       .then((res) => {
         dispatch({ type: EDIT_DEPEVENT, payload: { ...data } });
@@ -46,6 +54,7 @@ export const deleteDepenseEvent = (id) => {
     return axios({
       method: "delete",
       url: `${process.env.REACT_APP_API_URL}depensesEvent/${id}`,
+      withCredentials: true,
     })
       .then((res) => {
         dispatch({ type: DELETE_DEPEVENT, payload: { id } });

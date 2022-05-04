@@ -8,8 +8,6 @@ module.exports.getAllUsers = async (req, res) => {
 };
 
 module.exports.userInfo = async (req, res) => {
-  console.log(req.params);
-  Users.findByPk();
   const user = await Users.findByPk(req.params.id, {
     attributes: { exclude: ["password"] },
   })

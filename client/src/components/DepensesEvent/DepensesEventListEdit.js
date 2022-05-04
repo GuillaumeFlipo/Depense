@@ -80,8 +80,8 @@ const DepensesEventListEdit = ({ depenseEvent, list, setList }) => {
   useEffect(() => {
     let date_a = new Date(dateDebut);
     let date_b = new Date(dateFin);
-    setDateFin(date_a.toJSON().split("T")[0]);
-    setDateDebut(date_b.toJSON().split("T")[0]);
+    setDateDebut(date_a.toJSON().split("T")[0]);
+    setDateFin(date_b.toJSON().split("T")[0]);
   }, []);
 
   const elementShow = () => {

@@ -14,6 +14,14 @@ module.exports.readTransactionsId = async (req, res) => {
   res.status(200).json(listOfTransactions);
 };
 
+module.exports.readTransactionsEvent = async (req, res) => {
+  const listOfTransactions = await Transactions.findAll({
+    where: { DepensesEventId: req.params.id },
+  });
+
+  res.status(200).json(listOfTransactions);
+};
+
 module.exports.createTransaction = async (req, res) => {
   const transaction = req.body;
   await Transactions.create(transaction)

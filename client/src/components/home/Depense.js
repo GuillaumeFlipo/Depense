@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { monthStringToNumber } from "../../fonction_js/Utils";
+import { isEmpty, monthStringToNumber } from "../../fonction_js/Utils";
 import Categorie from "./Categorie";
 import DepensesEvent from "./DepensesEvent";
 import PayementReccurent from "./PayementReccurent";
@@ -20,6 +20,8 @@ const Depense = () => {
   const [monthNumber, setMonthNumber] = useState(date.getMonth());
   // const listNumber = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   const transactionData = useSelector((state) => state.transactionReducer);
+
+  const userData = useSelector((state) => state.userReducer);
 
   const categories = [
     "Nourriture",
@@ -202,13 +204,20 @@ const Depense = () => {
           transactionData={transactionData}
         />
       </div>
-      <React.Fragment>
-        <div className="gestion_list_depenseEvent">
-          <Link to="/DepenseEvent">Ajouter une dépense à un évènement</Link>
-        </div>
-        <PayementReccurent categories={categories} month={month} year={year} />
-        <DepensesEvent />
-      </React.Fragment>
+      {!isEmpty(userData) && (
+        <React.Fragment>
+          <div className="gestion_list_depenseEvent">
+            <Link to="/DepenseEvent">Ajouter une dépense à un évènement</Link>
+          </div>
+          <PayementReccurent
+            categories={categories}
+            month={month}
+            year={year}
+          />
+          <DepensesEvent />
+        </React.Fragment>
+      )}
+
       <div className="categorie_container">
         {categories.map((cat, key) => (
           <Categorie

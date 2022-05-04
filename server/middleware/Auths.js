@@ -1,42 +1,48 @@
 const jwt = require("jsonwebtoken");
 const { Users } = require("./../models");
 
-module.exports.checkUser = (req, res, next) => {
-  const token = req.cookies.jwt;
-  if (token) {
-    jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
-      if (err) {
-        res.locals.user = null;
-        res.cookies("jwt", "", { maxAge: 1 });
+module.exports.requireAuth = async (req, res, next) => {
+  try {
+    const token = req.cookies.jwt;
+    const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+
+    // const user = await Users.findByPk(decodedToken.id, {
+    //   attributes: { exclude: ["password"] },
+    // });
+    if (req.body.userId && req.body.userId !== decodedToken.id) {
+      throw "Invalid user ID";
+      // } else if(user.superUtilisateur) {
+    } else if (req.params.bool === "true") {
+      const user = await Users.findByPk(decodedToken.id, {
+        attributes: { exclude: ["password"] },
+      });
+      if (user.superUtilisateur === "true") {
         next();
       } else {
-        let user = await Users.findByPk(decodedToken.id, {
-          attributes: { exclude: ["password"] },
-        });
-        res.locals.user = user;
-        // console.log(res.locals.user);
-        next();
+        res.status(201).json("not allowed");
       }
+    } else {
+      next();
+    }
+  } catch {
+    res.status(401).json({
+      error: "Need authorization",
     });
-  } else {
-    res.locals.user = null;
-    next();
   }
 };
 
-module.exports.requireAuth = (req, res, next) => {
-  const token = req.cookies.jwt;
-  if (token) {
-    jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(decodedToken.id);
-        next();
-      }
+module.exports.checkUser = async (req, res, next) => {
+  try {
+    const token = req.cookies.jwt;
+    const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+    const user = await Users.findByPk(decodedToken.id, {
+      attributes: { exclude: ["password"] },
     });
-  } else {
-    console.log("No token");
+    res.locals.user = user;
+    next();
+  } catch {
+    res.locals.user = null;
+
     next();
   }
 };

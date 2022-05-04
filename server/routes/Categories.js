@@ -4,10 +4,12 @@ const categoriesCtrl = require("../controllers/Categories");
 // const multer = require("multer");
 // const upload = multer();
 
-router.get("/", categoriesCtrl.readCategories);
-router.get("/:id", categoriesCtrl.readOneTransaction);
-router.post("/", categoriesCtrl.createTransaction);
-router.put("/:id", categoriesCtrl.updateTransaction);
-router.delete("/:id", categoriesCtrl.deleteTransaction);
+const auth = require("../middleware/Auths");
+
+router.get("/", auth.requireAuth, categoriesCtrl.readCategories);
+router.get("/:id", auth.requireAuth, categoriesCtrl.readOneTransaction);
+router.post("/", auth.requireAuth, categoriesCtrl.createTransaction);
+router.put("/:id", auth.requireAuth, categoriesCtrl.updateTransaction);
+router.delete("/:id", auth.requireAuth, categoriesCtrl.deleteTransaction);
 
 module.exports = router;

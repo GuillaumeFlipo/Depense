@@ -14,7 +14,6 @@ import thunk from "redux-thunk";
 import rootReducer from "./reducers";
 
 import { getMeasures } from "./actions/page.action";
-import { getTransactions } from "./actions/transaction.action";
 import { getCategories } from "./actions/categorie.action";
 
 const store = createStore(
@@ -23,7 +22,6 @@ const store = createStore(
 );
 
 store.dispatch(getMeasures());
-store.dispatch(getCategories());
 
 window.onresize = function () {
   store.dispatch(getMeasures());

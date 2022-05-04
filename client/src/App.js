@@ -51,6 +51,9 @@ const App = () => {
 
   useEffect(() => {
     fetchToken();
+  }, []);
+
+  useEffect(() => {
     console.log(uid);
     if (uid) {
       dispatch(getUser(uid));

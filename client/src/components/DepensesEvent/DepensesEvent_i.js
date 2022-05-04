@@ -2,6 +2,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
+import { getTransactionsEvent } from "../../actions/transaction.action";
 import { getUsers } from "../../actions/users.action";
 import {
   isEmpty,
@@ -27,9 +28,10 @@ const DepensesEvent_i = ({ list, setList, categories }) => {
 
   useEffect(() => {
     dispatch(getUsers());
+    dispatch(getTransactionsEvent(list));
   }, []);
 
-  const transactionData = useSelector((state) => state.transactionReducer);
+  const transactionData = useSelector((state) => state.transactionEventReducer);
   const depensesEventData = useSelector((state) => state.depenseEventReducer);
 
   useEffect(() => {

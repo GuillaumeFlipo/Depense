@@ -12,6 +12,7 @@ const DepensesEvent = () => {
   const dispatch = useDispatch();
 
   const [toggleBool, setToggleBool] = useState(false);
+  const [boolAxiosUsers, setBoolAxiosUsers] = useState(false);
   const [dateDebut, setDateDebut] = useState(1);
   const [dateFin, setDateFin] = useState(1);
   const [nom, setNom] = useState("");
@@ -26,7 +27,6 @@ const DepensesEvent = () => {
 
     if (otherUserName !== "") {
       let userOther = usersData.filter((val) => val.nom == otherUserName);
-      console.log("id", userOther[0].id);
 
       let data = {
         nom: nom,
@@ -58,9 +58,14 @@ const DepensesEvent = () => {
     let dateActuel = new Date(Date.now());
     setDateFin(dateActuel.toJSON().split("T")[0]);
     setDateDebut(dateActuel.toJSON().split("T")[0]);
-    if (toggleBool) {
+    if (toggleBool && !boolAxiosUsers) {
       dispatch(getUsers());
+      setBoolAxiosUsers(true);
     }
+    // if (toggleBool && !boolAxiosUsers && userData.superUtilisateur === "true") {
+    //   dispatch(getUsers());
+    //   setBoolAxiosUsers(true);
+    // }
   }, [toggleBool]);
 
   return (
