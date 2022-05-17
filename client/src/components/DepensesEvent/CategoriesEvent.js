@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addTransaction,
+  addTransactionEvent,
   deleteTransaction,
   getTransactions,
 } from "../../actions/transaction.action";
@@ -10,6 +11,10 @@ import { UidContext } from "../AppContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import EditTransactionEvent from "./EditTransactionEvent";
+import {
+  addTransactionEvent_event,
+  getTransactionsEvent,
+} from "../../actions/transactionEvent.action";
 
 const CategorieEvent = ({
   cat,
@@ -18,7 +23,7 @@ const CategorieEvent = ({
   transactionData,
   moisNum,
   jourNum,
-  list,
+  list, // id de la dépense évent
   utilisateurs,
 }) => {
   const dispatch = useDispatch();
@@ -59,8 +64,9 @@ const CategorieEvent = ({
           quiPaye: qui,
           quiAPaye: quiAPaye,
         };
-        await dispatch(addTransaction(data));
+        await dispatch(addTransactionEvent_event(data));
       }
+      dispatch(getTransactionsEvent(list));
     } else {
       const user = utilisateurs.filter((val) => val[0].nom == qui);
 
@@ -78,7 +84,8 @@ const CategorieEvent = ({
         quiPaye: qui,
         quiAPaye: quiAPaye,
       };
-      await dispatch(addTransaction(data));
+      await dispatch(addTransactionEvent_event(data));
+      dispatch(getTransactionsEvent(list));
     }
     setNom("");
     setSomme("");
@@ -89,6 +96,7 @@ const CategorieEvent = ({
     setQui(userData.nom);
     setQuiAPaye(userData.nom);
   }, [userData]);
+
   const handleDelete = (id) => {
     let bol = window.confirm(`Voulez vous vraiment supprimer cette dépense ?`);
     if (bol) {

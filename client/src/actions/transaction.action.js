@@ -1,12 +1,10 @@
 import axios from "axios";
 
 export const GET_TRANSACTIONS = "GET_TRANSACTIONS";
-export const GET_TRANSACTIONSEVENT = "GET_TRANSACTIONSEVENT";
 export const ADD_TRANSACTION = "ADD_TRANSACTION";
 export const EDIT_TRANSACTION = "EDIT_TRANSACTION";
 export const DELETE_TRANSACTION = "DELETE_TRANSACTION";
-export const UPLOAD_EDIT = "UPLOAD_PICTURE_EDIT";
-export const UPLOAD_ADD = "UPLOAD_PICTURE_ADD";
+export const ADD_TRANSACTION_EVENT = "ADD_TRANSACTION_EVENT";
 
 export const getTransactions = (id) => {
   return (dispatch) => {
@@ -17,20 +15,6 @@ export const getTransactions = (id) => {
     })
       .then((res) => {
         dispatch({ type: GET_TRANSACTIONS, payload: res.data });
-      })
-      .catch((err) => console.log(err));
-  };
-};
-
-export const getTransactionsEvent = (id) => {
-  return (dispatch) => {
-    return axios({
-      method: "get",
-      url: `${process.env.REACT_APP_API_URL}transaction/depensesEvent/${id}`,
-      withCredentials: true,
-    })
-      .then((res) => {
-        dispatch({ type: GET_TRANSACTIONSEVENT, payload: res.data });
       })
       .catch((err) => console.log(err));
   };
@@ -48,6 +32,12 @@ export const addTransaction = (data) => {
         dispatch({ type: ADD_TRANSACTION, payload: data });
       })
       .catch((err) => console.log(err));
+  };
+};
+
+export const addTransactionEvent = (data) => {
+  return (dispatch) => {
+    dispatch({ type: ADD_TRANSACTION_EVENT, payload: data });
   };
 };
 

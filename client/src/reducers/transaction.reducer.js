@@ -3,8 +3,7 @@ import {
   DELETE_TRANSACTION,
   EDIT_TRANSACTION,
   GET_TRANSACTIONS,
-  UPLOAD_ADD,
-  UPLOAD_EDIT,
+  ADD_TRANSACTION_EVENT,
 } from "../actions/transaction.action";
 
 const initialState = {};
@@ -14,6 +13,8 @@ export default function transactionReducer(state = initialState, action) {
     case GET_TRANSACTIONS:
       return action.payload;
     case ADD_TRANSACTION:
+      return [action.payload, ...state];
+    case ADD_TRANSACTION_EVENT:
       return [action.payload, ...state];
     case EDIT_TRANSACTION:
       return state.map((post) => {
@@ -27,10 +28,6 @@ export default function transactionReducer(state = initialState, action) {
           };
         } else return post;
       });
-    case UPLOAD_EDIT:
-      return [...state];
-    case UPLOAD_ADD:
-      return [...state, action.payload];
     case DELETE_TRANSACTION:
       return state.filter((post) => post.id !== action.payload.postId);
     default:

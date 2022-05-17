@@ -2,7 +2,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
-import { getTransactionsEvent } from "../../actions/transaction.action";
+import { getTransactionsEvent } from "../../actions/transactionEvent.action";
 import { getUsers } from "../../actions/users.action";
 import {
   isEmpty,
