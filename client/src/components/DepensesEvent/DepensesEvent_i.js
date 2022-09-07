@@ -2,12 +2,17 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
-import { getTransactionsEvent } from "../../actions/transactionEvent.action";
+import {
+  addTransactionEvent_event,
+  getTransactionsEvent,
+} from "../../actions/transactionEvent.action";
 import { getUsers } from "../../actions/users.action";
 import {
   isEmpty,
   monthNumberToString,
   monthStringToNumber,
+  toFloat,
+  toInt,
 } from "../../fonction_js/Utils";
 import { UidContext } from "../AppContext";
 import TableauChart from "../home/TableauChart";
@@ -71,7 +76,11 @@ const DepensesEvent_i = ({ list, setList, categories }) => {
           }
         }
         sommeArray.push([
-          { nom: user[0].nom, somme: somme_, sommeTotal: somme_total },
+          {
+            nom: user[0].nom,
+            somme: somme_,
+            sommeTotal: somme_total,
+          },
         ]);
       }
       setSomme(sommeArray);
@@ -94,8 +103,8 @@ const DepensesEvent_i = ({ list, setList, categories }) => {
 
       let indexArray = depenseEventData.UserId.split("/");
       for (let i of indexArray) {
-        let users = usersData.filter((val) => val.id.toString() == i);
-        Array.push(users);
+        let user = usersData.filter((val) => val.id.toString() == i);
+        Array.push(user);
       }
 
       setUtilisateurs(Array);
@@ -106,22 +115,65 @@ const DepensesEvent_i = ({ list, setList, categories }) => {
     if (somme.length > 1) {
       if (somme[0][0].somme >= somme[1][0].somme) {
         return (
-          <p>
-            {somme[1][0].nom} doit{" "}
-            <span>{(somme[0][0].somme - somme[1][0].somme).toFixed(2)} € </span>{" "}
-            à {somme[0][0].nom}
-          </p>
+          <React.Fragment>
+            <p>
+              {somme[1][0].nom} doit{" "}
+              <span>
+                {(somme[0][0].somme - somme[1][0].somme).toFixed(2)} €{" "}
+              </span>{" "}
+              à {somme[0][0].nom}
+            </p>
+          </React.Fragment>
         );
       } else {
         return (
-          <p>
-            {somme[0][0].nom} doit{" "}
-            <span>{(somme[1][0].somme - somme[0][0].somme).toFixed(2)} € </span>{" "}
-            à {somme[1][0].nom}
-          </p>
+          <React.Fragment>
+            <p>
+              {somme[0][0].nom} doit{" "}
+              <span>
+                {(somme[1][0].somme - somme[0][0].somme).toFixed(2)} €{" "}
+              </span>{" "}
+              à {somme[1][0].nom}
+            </p>
+          </React.Fragment>
         );
       }
     }
+  };
+
+  const repayDone = async () => {
+    let data = [];
+    if (somme[0][0].somme >= somme[1][0].somme) {
+      data = {
+        nom: `${somme[1][0].nom}-> ${somme[0][0].nom}`,
+        somme: toFloat((somme[0][0].somme - somme[1][0].somme).toFixed(2)),
+        dateString: date.getDate(),
+        categorie: "Remboursement",
+        month: month,
+        year: year,
+        date: date,
+        DepensesEventId: list,
+        quiPaye: somme[0][0].nom,
+        quiAPaye: somme[1][0].nom,
+        UserId: 1,
+      };
+    } else {
+      data = {
+        nom: `${somme[0][0].nom}-> ${somme[1][0].nom}`,
+        somme: toFloat((somme[1][0].somme - somme[0][0].somme).toFixed(2)),
+        dateString: date.getDate(),
+        categorie: "Remboursement",
+        month: month,
+        year: year,
+        date: date,
+        DepensesEventId: list,
+        quiPaye: somme[1][0].nom,
+        quiAPaye: somme[0][0].nom,
+        UserId: 1,
+      };
+    }
+    await dispatch(addTransactionEvent_event(data));
+    // dispatch(getTransactionsEvent(list));
   };
 
   return (
@@ -156,6 +208,14 @@ const DepensesEvent_i = ({ list, setList, categories }) => {
           <div className="somme_element">
             {!isEmpty(somme) && triCountFunction()}
           </div>
+          <p
+            className="repay"
+            onClick={() => {
+              repayDone();
+            }}
+          >
+            Remboursement effectué
+          </p>
         </div>
       )}
       <div className="categorie_container">

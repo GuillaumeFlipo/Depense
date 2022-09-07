@@ -25,6 +25,13 @@ const EditTransaction = ({ transaction, moisNum, year }) => {
     }
   };
 
+  useEffect(() => {
+    setNom(transaction.nom);
+    setDate(transaction.dateString);
+    setSomme(transaction.somme);
+    setComment(transaction.comment);
+  }, [transaction]);
+
   const handleEdit = async (e) => {
     e.preventDefault();
     let somme_ = somme.toString();

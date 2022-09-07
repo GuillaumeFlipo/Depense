@@ -2,7 +2,10 @@ import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addDepenseEvent } from "../../actions/depensesEvent.action";
+import {
+  addDepenseEvent,
+  getDepenseEvents,
+} from "../../actions/depensesEvent.action";
 import { getUsers } from "../../actions/users.action";
 import { isEmpty } from "../../fonction_js/Utils";
 import { UidContext } from "../AppContext";
@@ -47,6 +50,7 @@ const DepensesEvent = () => {
       };
       await dispatch(addDepenseEvent(data));
     }
+    dispatch(getDepenseEvents(uid));
 
     setToggleBool(false);
     setNom("");

@@ -21,6 +21,7 @@ const ChartEvent = ({ categories, month, year, transactionData, list }) => {
         for (let i = 0; i < transactionData.length; i++) {
           if (
             transactionData[i].categorie == categories[j] &&
+            transactionData[i].categorie != "Remboursement" &&
             transactionData[i].month == month &&
             transactionData[i].year == year &&
             transactionData[i].DepensesEventId == list &&
@@ -30,6 +31,7 @@ const ChartEvent = ({ categories, month, year, transactionData, list }) => {
           }
           if (
             transactionData[i].categorie == categories[j] &&
+            transactionData[i].categorie != "Remboursement" &&
             transactionData[i].month == month &&
             transactionData[i].year == year &&
             transactionData[i].DepensesEventId == list &&
@@ -61,7 +63,7 @@ const ChartEvent = ({ categories, month, year, transactionData, list }) => {
       const myChart = new Chart(ctx, {
         type: "pie",
         data: {
-          labels: categories,
+          labels: categories.filter((value) => value != "Remboursement"),
           datasets: [
             {
               label: "Répartition des dépenses",
@@ -149,12 +151,14 @@ const ChartEvent = ({ categories, month, year, transactionData, list }) => {
   return (
     <React.Fragment>
       <div className="total_tableau">
-        {categories.map((cat, key) => (
-          <div key={key} className="element_tableau">
-            <p>{cat}</p>
-            <p>{sommeTotalCat[key]} €</p>
-          </div>
-        ))}
+        {categories
+          .filter((val) => val != "Remboursement")
+          .map((cat, key) => (
+            <div key={key} className="element_tableau">
+              <p>{cat}</p>
+              <p>{sommeTotalCat[key]} €</p>
+            </div>
+          ))}
         <div className="element_tableau">
           <p>Total :</p>
           <p>

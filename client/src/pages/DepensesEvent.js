@@ -13,6 +13,7 @@ const DepensesEvent = () => {
     "Santé",
     "Abonnement",
     "Autre",
+    "Remboursement",
   ];
 
   return (

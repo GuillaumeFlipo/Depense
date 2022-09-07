@@ -135,7 +135,7 @@ const CategorieEvent = ({
         //   somme_ = transactionData[i].somme * 2 + somme_;
         // }
       }
-
+      console.log(somme_, "somme");
       if (somme_ != 0) {
         setSommeTotal(somme_.toFixed(2));
       } else {
@@ -192,6 +192,7 @@ const CategorieEvent = ({
                 key={key}
                 moisNum={moisNum}
                 year={year}
+                idDepenseEvent={list}
               />
             ))}
       </div>

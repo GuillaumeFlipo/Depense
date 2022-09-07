@@ -9,11 +9,21 @@ import {
 } from "../../actions/transaction.action";
 import { UidContext } from "../AppContext";
 import { isEmpty } from "../../fonction_js/Utils";
+import { getTransactionsEvent } from "../../actions/transactionEvent.action";
 
-const EditTransactionEvent = ({ transaction, moisNum, year }) => {
+const EditTransactionEvent = ({
+  transaction,
+  moisNum,
+  year,
+  idDepenseEvent,
+}) => {
   const [editBoll, setEditBool] = useState(false);
   const [nom, setNom] = useState(transaction.nom);
-  const [somme, setSomme] = useState(transaction.somme);
+  const [somme, setSomme] = useState(
+    transaction.quiPaye == "Nous deux"
+      ? transaction.somme * 2
+      : transaction.somme
+  );
   const [comment, setComment] = useState(transaction.comment);
   const [date, setDate] = useState(transaction.dateString);
   const dispatch = useDispatch();
@@ -22,19 +32,29 @@ const EditTransactionEvent = ({ transaction, moisNum, year }) => {
 
   const transactionData = useSelector((state) => state.transactionEventReducer);
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     let bol = window.confirm(`Voulez vous vraiment supprimer cette dépense ?`);
     if (bol && !isEmpty(transactionData)) {
-      transactionData
-        .filter(
-          (val) =>
-            val.DepensesEventId == transaction.DepensesEventId &&
-            val.nom == transaction.nom &&
-            val.somme == transaction.somme &&
-            val.quiPaye == transaction.quiPaye
-        )
-        .map((transac) => dispatch(deleteTransaction(transac.id)));
+      await deleteGetFunction(id);
     }
+    dispatch(getTransactionsEvent(idDepenseEvent));
+  };
+
+  const deleteGetFunction = (id) => {
+    transactionData
+      .filter(
+        (val) =>
+          val.DepensesEventId == transaction.DepensesEventId &&
+          val.nom == transaction.nom &&
+          val.somme == transaction.somme &&
+          val.quiPaye == transaction.quiPaye &&
+          val.quiAPaye == transaction.quiAPaye &&
+          val.comment == transaction.comment
+      )
+      .map((transac) => {
+        dispatch(deleteTransaction(id));
+        dispatch(getTransactionsEvent);
+      });
   };
 
   const handleEdit = async (e) => {
@@ -45,18 +65,46 @@ const EditTransactionEvent = ({ transaction, moisNum, year }) => {
     let result_date = date2.slice(0, 2);
     setDate(result_date);
 
-    const data = {
-      nom: nom,
-      somme: parseFloat(result_somme),
-      comment: comment,
-      dateString: result_date,
-      id: transaction.id,
-    };
+    if (transaction.quiPaye === "Nous deux") {
+      await transactionData
+        .filter(
+          (val) =>
+            val.DepensesEventId == transaction.DepensesEventId &&
+            val.nom == transaction.nom &&
+            val.somme == transaction.somme &&
+            val.quiPaye == transaction.quiPaye &&
+            val.quiAPaye == transaction.quiAPaye &&
+            val.comment == transaction.comment
+        )
+        .map((transac) =>
+          updateNousDeuxFunction(transac.id, result_date, result_somme)
+        );
+    } else {
+      const data = {
+        nom: nom,
+        somme: parseFloat(result_somme),
+        comment: comment,
+        dateString: result_date,
+        id: transaction.id,
+      };
+      await dispatch(editTransaction(data));
+      dispatch(getTransactionsEvent(idDepenseEvent));
+    }
 
-    await dispatch(editTransaction(data));
-    dispatch(getTransactions(uid));
     setEditBool(false);
     // window.location = "/";
+  };
+
+  const updateNousDeuxFunction = async (id, result_date, result_somme) => {
+    const data = {
+      nom: nom,
+      somme: parseFloat(result_somme) / 2,
+      comment: comment,
+      dateString: result_date,
+      id: id,
+    };
+    await dispatch(editTransaction(data));
+    dispatch(getTransactionsEvent(idDepenseEvent));
   };
 
   return (

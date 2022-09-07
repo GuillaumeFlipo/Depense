@@ -83,7 +83,13 @@
                 color: green;
             }
         }
-            
+  
+        }
+
+        .repay{
+            margin: 10px auto;
+            cursor: pointer;
+            @include submit();
         }
         p{
             margin: 3px 5px;

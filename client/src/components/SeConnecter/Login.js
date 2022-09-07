@@ -11,7 +11,8 @@ const Login = ({ path }) => {
 
   const [uid, setUid] = useContext(UidContext);
 
-  const login = async () => {
+  const login = async (e) => {
+    e.preventDefault();
     const data = { nom: nom, password: password };
     await axios({
       method: "post",
@@ -39,7 +40,7 @@ const Login = ({ path }) => {
       {uid ? (
         <h1 className="titre_login">Déjà connecté</h1>
       ) : (
-        <div className="login_container">
+        <form className="login_container" onSubmit={(e) => login(e)}>
           <div style={{ color: "red" }}>{message}</div>
           <label>Nom:</label>
           <input
@@ -58,10 +59,12 @@ const Login = ({ path }) => {
             }}
             name="password"
           />
-          <button className="pointer submit" onClick={login}>
-            Se connecter
-          </button>
-        </div>
+          <input
+            type="submit"
+            value="Se connecter"
+            className="pointer submit"
+          />
+        </form>
       )}
     </React.Fragment>
   );
