@@ -54,8 +54,9 @@ const DepensesEvent_i = ({ list, setList, categories }) => {
     let sommeArray = [];
     if (utilisateurs.length >= 1 && transactionDataEvent.length >= 1) {
       for (let user of utilisateurs) {
-        let somme_ = 0;
-        let somme_total = 0;
+        let somme_ = 0; // somme corespondant à ce que le user à payer pour l'autre
+        let somme_total = 0; // somme corespondant à ce que le user à payer indépendant pour qui
+        let somme_remboursement = 0; // somme corespondant à ce que l'autre user à remboursé à l'user
         for (let transaction of transactionDataEvent) {
           if (
             transaction.quiAPaye == user[0].nom &&
@@ -74,12 +75,20 @@ const DepensesEvent_i = ({ list, setList, categories }) => {
           ) {
             somme_ += transaction.somme;
           }
+          if (
+            transaction.quiAPaye != user[0].nom &&
+            transaction.quiPaye == user[0].nom &&
+            transaction.categorie == "Remboursement"
+          ) {
+            somme_remboursement += transaction.somme;
+          }
         }
         sommeArray.push([
           {
             nom: user[0].nom,
             somme: somme_,
             sommeTotal: somme_total,
+            somme_remboursement: somme_remboursement,
           },
         ]);
       }
@@ -201,7 +210,13 @@ const DepensesEvent_i = ({ list, setList, categories }) => {
               <p>{val[0].nom} à payé</p>
               <p>
                 {" "}
-                <span>{val[0].sommeTotal.toFixed(2)} €</span>
+                <span>
+                  {(
+                    toFloat(val[0].sommeTotal) -
+                    toFloat(somme[key][0].somme_remboursement)
+                  ).toFixed(2)}{" "}
+                  €
+                </span>
               </p>
             </div>
           ))}
