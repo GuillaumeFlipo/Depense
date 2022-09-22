@@ -49,10 +49,11 @@ const EditTransactionEvent = ({
           val.somme == transaction.somme &&
           val.quiPaye == transaction.quiPaye &&
           val.quiAPaye == transaction.quiAPaye &&
-          val.comment == transaction.comment
+          val.comment == transaction.comment &&
+          val.categorie == transaction.categorie
       )
       .map((transac) => {
-        dispatch(deleteTransaction(id));
+        dispatch(deleteTransaction(transac.id));
         dispatch(getTransactionsEvent);
       });
   };
