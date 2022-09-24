@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Menu from "../components/commun/Menu";
 import DepensesEventList from "../components/DepensesEvent/DepensesEventList";
 import DepensesEvent_i from "../components/DepensesEvent/DepensesEvent_i";
@@ -15,7 +15,6 @@ const DepensesEvent = () => {
     "Autre",
     "Remboursement",
   ];
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
