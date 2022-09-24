@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  # frontend:
+  #   build: ./client # where the docker file is
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - ./client:/app
+  
+  # # frontend-tests:
+  # #   image: vidly_frontend # where the docker file is
+  # #   volumes:
+  # #     - ./frontend:/app
+  # #   command: npm test
+
+  # backend:
+  #     build: ./server # where the docker file is
+  #     ports:
+  #       - 3001:3001
+  #     # environment:
+  #     #   DB_URL: mongodb://db/vidly
+  #     volumes:
+  #       - ./server:/app # avoid rebuil each time we change our files
+
+  db:
+    image: mysql:5.7
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: depense
+      MYSQL_USER: guillaume
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "6033:3306"
+    volumes:
+      - ./Depense:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8081:80
+volumes:
+  Depense:
+
