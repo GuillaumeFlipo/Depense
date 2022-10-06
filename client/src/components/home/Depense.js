@@ -142,7 +142,7 @@ const Depense = () => {
             <option value="Juillet">Juillet</option>
             <option value="Août">Août</option>
             <option value="Septembre">Septembre</option>
-            <option value="Octobre">Mars</option>
+            <option value="Octobre">Octobre</option>
             <option value="Novembre">Novembre</option>
             <option value="Décembre">Décembre</option>
           </select>
